@@ -1,7 +1,7 @@
 ## Author:       SHAD0W-0PS
 ## Script Name:  H.I.V.E
 ## Start Date:   23.12.2022
-## End Date:     27/1/2023
+## End Date:     27/1/2023  
 ## Purpose:      To automate some OSINT tasks
 
 #Importing the Modules
@@ -14,7 +14,7 @@ from truecallerpy import search_phonenumber
 #APIs
 #######################################################################
 #Shodan API key
-SHODAN_API_KEY = ""
+SHODAN_API_KEY = "OF8rLQDBSzlkIpxXQcVYD75v7TDxePZi"
 #intelx academia API
 INTELX_API = ""
 #Hunter.io API
@@ -238,15 +238,17 @@ def Phone():
 #shodan module
 #--------------
 def shodancrawl():
-    ip_address = input("Enter the IP address you want to search for: ")
+    ip = input("Enter the IP address you want to search for: ")
     api = shodan.Shodan(SHODAN_API_KEY)
-    results = api.host(ip_address)
+    results = api.host(ip)
     json_str = json.dumps(results, indent=4)
-    with open("Shodan_Output/{}.txt".format(ip_address), "w") as outfile:
+    with open("Shodan_Output/{}.json".format(ip), "w") as outfile:
         outfile.write(json_str)
-    print("Information about {} saved to file.".format(ip_address))
-    back1 = input("Type back to go back to the HIVE menu: ")
-    if back1 =="back":
+    os.system("./yq e -P Shodan_Output/" + ip + ".json > Shodan_Output/" + ip + " && rm -rf Shodan_Output/" + ip + ".json")
+    os.system("less Shodan_Output/" + ip)
+    print("Information about {} saved to file.".format(ip))
+    back = input("Type back to go back to the HIVE menu: ")
+    if back =="back":
         os.system("python hive.py")
 
 #IP geolocation Module
@@ -254,18 +256,18 @@ def shodancrawl():
 def geo():
     print(ipgeobanner)
     def get_location():
-        ip_address = input("Enter the IP of your Target: ")
-        response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
+        ip = input("Enter the IP of your Target: ")
+        response = requests.get(f'https://ipapi.co/{ip}/json/').json()
         location_data = {
-            "ip": ip_address,
+            "ip": ip,
             "city": response.get("city"),
             "region": response.get("region"),
             "country": response.get("country_name")
         }
         return location_data
     print(get_location())
-    back2 = input("type back to go back to the main menu: ")
-    if back2 =="back":
+    back = input("type back to go back to the main menu: ")
+    if back =="back":
         os.system("python hive.py")
 
 #Intelligencex API module
@@ -277,8 +279,8 @@ def intel():
     os.system("clear")
     os.system("python Extras/intel.py -search "+ target2+" -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey " +INTELX_API+ " -limit 100")
     print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
-    back3 = input("type back to go back to the hive menu: ")
-    if back3 =="back":
+    back = input("type back to go back to the hive menu: ")
+    if back =="back":
         os.system("python hive.py")
 
 #Email Verifier Module
@@ -294,8 +296,8 @@ def emver():
         print("The email "+email+" is valid")
     else:
         print("The email "+email+" is not valid")
-    back4 = input("Type back to go back to the main menu: ")
-    if back4 =="back":
+    back = input("Type back to go back to the main menu: ")
+    if back =="back":
         os.system("python hive.py")
 ###########################################################################
 
@@ -306,6 +308,8 @@ print(bannermain)
 print(tool_list)
 print("type exit to exit the script")
 choice1 = input("Enter The Number of The Module you want to use: ")
+back = ""
+ip = ""
 
 if choice1 == "1":
     os.system("clear")
