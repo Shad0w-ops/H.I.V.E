@@ -10,11 +10,12 @@ import shodan
 import requests
 import json
 from truecallerpy import search_phonenumber
+import yaml
 
 #APIs
 #######################################################################
 #Shodan API key
-SHODAN_API_KEY = "OF8rLQDBSzlkIpxXQcVYD75v7TDxePZi"
+SHODAN_API_KEY = ""
 #intelx academia API
 INTELX_API = ""
 #Hunter.io API
@@ -238,14 +239,14 @@ def Phone():
 #shodan module
 #--------------
 def shodancrawl():
+    print(bannershod)
     ip = input("Enter the IP address you want to search for: ")
     api = shodan.Shodan(SHODAN_API_KEY)
     results = api.host(ip)
-    json_str = json.dumps(results, indent=4)
-    with open("Shodan_Output/{}.json".format(ip), "w") as outfile:
-        outfile.write(json_str)
-    os.system("./yq e -P Shodan_Output/" + ip + ".json > Shodan_Output/" + ip + " && rm -rf Shodan_Output/" + ip + ".json")
-    os.system("less Shodan_Output/" + ip)
+    yaml_data = yaml.safe_dump(results, default_flow_style=False)
+    print(yaml_data)
+    with open("Shodan_Output/{}.txt".format(ip), "w") as outfile:
+        outfile.write(yaml_data)
     print("Information about {} saved to file.".format(ip))
     back = input("Type back to go back to the HIVE menu: ")
     if back =="back":
