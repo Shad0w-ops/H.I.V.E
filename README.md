@@ -45,7 +45,7 @@ Phonekit allows you to get someones phone number from their name and vice versa 
 
 ### Shodan Crawler:
 
-The shodan crawler utilises the shodan API to generate JSON formatted reports on a given IP address passively and saves the report in the Shodan_Output folder
+The shodan crawler utilises the shodan API to generate YAML formatted reports on a given IP address passively and saves the report in the Shodan_Output folder
 
 ### IP Geolocation:
 
@@ -69,4 +69,4 @@ This module utilises the Hunter.io API and allows you to check if an email addre
 |Intelx API|intelx.io|Free, Paid, Educational|
 |Hunter API|hunter.io|Free, Paid|
 
-(Note) Educational means that there is a better subscription plan for free that they provide for accounts created with student Emails (.edu)
+(NOTE) Educational means that there is a better subscription plan for free that they provide for accounts created with student Emails (.edu)
