@@ -308,8 +308,6 @@ print(bannermain)
 print(tool_list)
 print("type exit to exit the script")
 choice1 = input("Enter The Number of The Module you want to use: ")
-back = ""
-ip = ""
 
 if choice1 == "1":
     os.system("clear")
