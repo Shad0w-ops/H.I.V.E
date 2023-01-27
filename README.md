@@ -45,15 +45,15 @@ Phonekit allows you to get someones phone number from their name and vice versa 
 
 ### Shodan Crawler:
 
-The shodan crawler utilises the shodan API to generate JSON formatted reports on a givven IP address passively and saves the report in the Shodan_Output folder
+The shodan crawler utilises the shodan API to generate JSON formatted reports on a given IP address passively and saves the report in the Shodan_Output folder
 
 ### IP Geolocation:
 
-The IP geolocation module gives you an esimated location for a givven IP address
+The IP geolocation module gives you an esimated location for a given IP address
 
 ### Database Lookup:
 
-The database lookup module utilises the IntelX API to dearch for a givven query in thousands of leaked databases
+The database lookup module utilises the IntelX API to search for a given query in thousands of leaked databases
 
 (NOTE) the output may not be complete and in that case take the id of the leak and search for it in the INTELX website and search for your query in the database to find that exact term/query
 
