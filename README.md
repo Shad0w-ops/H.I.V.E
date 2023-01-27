@@ -7,7 +7,7 @@ H.I.V.E OSINT automation tool
 (DISCLAIMER)
 This tool is made for educational purposes only, and i wont be held responsible for any missuse of this tool.
 
-## installation
+## installation (Linux)
 
     pip3 install -r requirements.txt
 
