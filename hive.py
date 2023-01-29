@@ -13,7 +13,7 @@ from truecallerpy import search_phonenumber
 import yaml
 import Banners
 import apis
-import pikepdf
+import subprocess
 
 #Defining needed Functions
 #########################################################
@@ -207,29 +207,26 @@ def sher():
     target = input("Enter the username of your target: ")
     os.system("clear")
     os.system("python Extras/sherlock/sherlock/sherlock.py "+target+" --nsfw -fo Sherlock_Output")
+    back = input("type back to back to the main menu: ")
+    if back =="back":
+        os.system("python hive.py")
 
+#metadata extractor module
 def meta():
-    def pdf():
-        #Open PDF with pikepdf
-        print(Banners.meta)
-        filename = input("Enter the name of your file: ")
-        pdf = pikepdf.Pdf.open("Metadata/PDF_files/"+filename)
-        #Extract metadata from PDF
-        pdf_info = pdf.docinfo
-        #Print out the metadata
-        for key, value in pdf_info.items():
-            print(key, ':', value)
-        back1 = input("type back to go back to the main menu: ")
-        if back1 == "back":
-            os.system("python hive.py")
-                            
     print(Banners.meta)                        
-    print(Banners.itemtype)
-    choice2 = input("Enter the number that suites your filetype: ")
-    if choice2 =="1":
-        os.system("clear")
-        pdf()
-
+    infoDict = {}
+    exifToolPath = ("exiftool")
+    imgPath = input("Enter the path of your file: ")
+    process = subprocess.Popen([exifToolPath,imgPath],stdout=subprocess.PIPE, stderr=subprocess.STDOUT,universal_newlines=True) 
+    for tag in process.stdout:
+        line = tag.strip().split(':')
+        infoDict[line[0].strip()] = line[-1].strip()
+    for k,v in infoDict.items():
+        print(k,':', v)
+    print("-------------------------")
+    back = input("type back to back to the main menu: ")
+    if back =="back":
+        os.system("python hive.py")
 ###########################################################################
 
 #script start
