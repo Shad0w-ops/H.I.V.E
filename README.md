@@ -11,7 +11,7 @@ This tool is made for educational purposes only, and i wont be held responsible 
 
     pip3 install -r requirements.txt
 
- Edit the hive.py file by adding your APIs In the following format
+ Edit the apis.py file by adding your APIs In the following format
 
 SHODAN_API_KEY = "YOUR API KEY HERE"
 
@@ -39,27 +39,31 @@ if you cant see it run:
 
 ### Phonekit:
 
-Phonekit allows you to get someones phone number from their name and vice versa using a database called FB19.txt in addition to having a builtin truecaller module to reverse lookup phone numbers without the database
+Phonekit allows you to get someones phone number from their name and vice versa using a database called FB19.txt in addition to having a builtin truecaller module to reverse lookup phone numbers without the database.
 
 (NOTE) this module will not fully work without the FB19.txt database (which is not provided)
 
 ### Shodan Crawler:
 
-The shodan crawler utilises the shodan API to generate YAML formatted reports on a given IP address passively and saves the report in the Shodan_Output folder
+The shodan crawler utilises the shodan API to generate YAML formatted reports on a given IP address passively and saves the report in the Shodan_Output folder.
 
 ### IP Geolocation:
 
-The IP geolocation module gives you an esimated location for a given IP address
+The IP geolocation module gives you an esimated location for a given IP address.
 
 ### Database Lookup:
 
 The database lookup module utilises the IntelX API to search for a given query in thousands of leaked databases
 
-(NOTE) the output may not be complete and in that case take the id of the leak and search for it in the INTELX website and search for your query in the database to find that exact term/query
+(NOTE) the output may not be complete and in that case take the id of the leak and search for it in the INTELX website and search for your query in the database to find that exact term/query.
 
 ### Email Verifier
 
-This module utilises the Hunter.io API and allows you to check if an email address exists, this can be used to check which emails are valid after bruteforcing a partially redacted email address
+This module utilises the Hunter.io API and allows you to check if an email address exists, this can be used to check which emails are valid after bruteforcing a partially redacted email address.
+
+### Sherlock
+
+This module can be used to find usernames across many social networks and saves the output in the Sherlock_Output folder.
 
 ## API Status Table
 
