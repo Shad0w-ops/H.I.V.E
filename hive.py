@@ -235,6 +235,7 @@ os.system("clear")
 print(Banners.bannermain)
 print(Banners.tool_list)
 print("type exit to exit the script")
+print("--------------------------------------------")
 choice1 = input("Enter The Number of The Module you want to use: ")
 
 if choice1 == "1":
