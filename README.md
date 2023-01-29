@@ -65,6 +65,11 @@ This module utilises the Hunter.io API and allows you to check if an email addre
 
 This module can be used to find usernames across many social networks and saves the output in the Sherlock_Output folder.
 
+###7) Metadata
+
+This module is used to find the metadata of PDF, Image & video files to use it put your target file in the Meta folder in its designated area
+then provide the script with the name of the file (include extention) and you will get the metadata output.
+
 ## API Status Table
 
 |API|Website|Status|
