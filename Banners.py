@@ -108,10 +108,3 @@ Phone Numbers       Social Security Number
 Bitcoin address     IBAN
 ----------------------------------------------
 '''
-
-
-itemtype = '''
-1) PDF
-2) Image
-3) Video
-'''
