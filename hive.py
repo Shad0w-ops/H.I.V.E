@@ -13,6 +13,7 @@ from truecallerpy import search_phonenumber
 import yaml
 import Banners
 import apis
+import pikepdf
 
 #Defining needed Functions
 #########################################################
@@ -207,6 +208,28 @@ def sher():
     os.system("clear")
     os.system("python Extras/sherlock/sherlock/sherlock.py "+target+" --nsfw -fo Sherlock_Output")
 
+def meta():
+    def pdf():
+        #Open PDF with pikepdf
+        print(Banners.meta)
+        filename = input("Enter the name of your file: ")
+        pdf = pikepdf.Pdf.open("Metadata/PDF_files/"+filename)
+        #Extract metadata from PDF
+        pdf_info = pdf.docinfo
+        #Print out the metadata
+        for key, value in pdf_info.items():
+            print(key, ':', value)
+        back1 = input("type back to go back to the main menu: ")
+        if back1 == "back":
+            os.system("python hive.py")
+                            
+    print(Banners.meta)                        
+    print(Banners.itemtype)
+    choice2 = input("Enter the number that suites your filetype: ")
+    if choice2 =="1":
+        os.system("clear")
+        pdf()
+
 ###########################################################################
 
 #script start
@@ -240,6 +263,10 @@ if choice1 =="5":
 if choice1 =="6":
     os.system("clear")
     sher()
+
+if choice1 =="7":
+    os.system("clear")
+    meta()
 else:
     print("Sad to see you go :(")
     exit()
