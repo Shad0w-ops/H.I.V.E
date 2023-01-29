@@ -37,31 +37,31 @@ if you cant see it run:
 
 ## Module Breakdown
 
-### Phonekit:
+### 1) Phonekit:
 
 Phonekit allows you to get someones phone number from their name and vice versa using a database called FB19.txt in addition to having a builtin truecaller module to reverse lookup phone numbers without the database.
 
 (NOTE) this module will not fully work without the FB19.txt database (which is not provided)
 
-### Shodan Crawler:
+### 2) Shodan Crawler:
 
 The shodan crawler utilises the shodan API to generate YAML formatted reports on a given IP address passively and saves the report in the Shodan_Output folder.
 
-### IP Geolocation:
+### 3) IP Geolocation:
 
 The IP geolocation module gives you an esimated location for a given IP address.
 
-### Database Lookup:
+### 4) Database Lookup:
 
 The database lookup module utilises the IntelX API to search for a given query in thousands of leaked databases
 
 (NOTE) the output may not be complete and in that case take the id of the leak and search for it in the INTELX website and search for your query in the database to find that exact term/query.
 
-### Email Verifier
+### 5) Email Verifier
 
 This module utilises the Hunter.io API and allows you to check if an email address exists, this can be used to check which emails are valid after bruteforcing a partially redacted email address.
 
-### Sherlock
+### 6) Sherlock
 
 This module can be used to find usernames across many social networks and saves the output in the Sherlock_Output folder.
 
