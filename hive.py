@@ -1,7 +1,7 @@
 ## Author:       SHAD0W-0PS
 ## Script Name:  H.I.V.E
 ## Start Date:   23.12.2022
-## End Date:     27/1/2023  
+## End Date: 
 ## Purpose:      To automate some OSINT tasks
 
 #Importing the Modules
@@ -11,109 +11,8 @@ import requests
 import json
 from truecallerpy import search_phonenumber
 import yaml
-
-#APIs
-#######################################################################
-#Shodan API key
-SHODAN_API_KEY = ""
-#intelx academia API
-INTELX_API = ""
-#Hunter.io API
-HUNTER_API = ""
-#Truecaller id
-TRUECALLER_ID = "" #your truecaller ID here use (truecallerpy --login) to log into the account (truecallerpy --installationid) to view installation ID
-
-#Script Banner Art
-#######################################################################
-
-#Main Banner
-bannermain = '''
- /$$   /$$     /$$$$$$  /$$    /$$ /$$$$$$$$
-| $$  | $$    |_  $$_/ | $$   | $$| $$_____/
-| $$  | $$      | $$   | $$   | $$| $$      
-| $$$$$$$$      | $$   |  $$ / $$/| $$$$$   
-| $$__  $$      | $$    \  $$ $$/ | $$__/   
-| $$  | $$      | $$     \  $$$/  | $$      
-| $$  | $$ /$$ /$$$$$$ /$$\  $//$$| $$$$$$$$
-|__/  |__/|__/|______/|__/ \_/|__/|________/
-)-------------------V.1.1------------------(                                            
-'''
-
-#PhoneKit Banner
-bannerphone = '''
- /$$$$$$$  /$$                                     /$$   /$$ /$$   /$$    
-| $$__  $$| $$                                    | $$  /$$/|__/  | $$    
-| $$  \ $$| $$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$ | $$ /$$/  /$$ /$$$$$$  
-| $$$$$$$/| $$__  $$ /$$__  $$| $$__  $$ /$$__  $$| $$$$$/  | $$|_  $$_/  
-| $$____/ | $$  \ $$| $$  \ $$| $$  \ $$| $$$$$$$$| $$  $$  | $$  | $$    
-| $$      | $$  | $$| $$  | $$| $$  | $$| $$_____/| $$\  $$ | $$  | $$ /$$
-| $$      | $$  | $$|  $$$$$$/| $$  | $$|  $$$$$$$| $$ \  $$| $$  |  $$$$/
-|__/      |__/  |__/ \______/ |__/  |__/ \_______/|__/  \__/|__/   \___/  
---------------------------------------------------------------------------
-'''
-
-#Shodan Banner
-bannershod = '''
-  /$$$$$$  /$$                       /$$                    
- /$$__  $$| $$                      | $$                    
-| $$  \__/| $$$$$$$   /$$$$$$   /$$$$$$$  /$$$$$$  /$$$$$$$ 
-|  $$$$$$ | $$__  $$ /$$__  $$ /$$__  $$ |____  $$| $$__  $$
- \____  $$| $$  \ $$| $$  \ $$| $$  | $$  /$$$$$$$| $$  \ $$
- /$$  \ $$| $$  | $$| $$  | $$| $$  | $$ /$$__  $$| $$  | $$
-|  $$$$$$/| $$  | $$|  $$$$$$/|  $$$$$$$|  $$$$$$$| $$  | $$
- \______/ |__/  |__/ \______/  \_______/ \_______/|__/  |__/
- ------------------------------------------------------------
-'''
-
-#Email Verifier Banner
-emvbanner = '''
-
- /$$$$$$$$                         /$$ /$$       /$$    /$$                    /$$  /$$$$$$  /$$                    
-| $$_____/                        |__/| $$      | $$   | $$                   |__/ /$$__  $$|__/                    
-| $$       /$$$$$$/$$$$   /$$$$$$  /$$| $$      | $$   | $$ /$$$$$$   /$$$$$$  /$$| $$  \__/ /$$  /$$$$$$   /$$$$$$ 
-| $$$$$   | $$_  $$_  $$ |____  $$| $$| $$      |  $$ / $$//$$__  $$ /$$__  $$| $$| $$$$    | $$ /$$__  $$ /$$__  $$
-| $$__/   | $$ \ $$ \ $$  /$$$$$$$| $$| $$       \  $$ $$/| $$$$$$$$| $$  \__/| $$| $$_/    | $$| $$$$$$$$| $$  \__/
-| $$      | $$ | $$ | $$ /$$__  $$| $$| $$        \  $$$/ | $$_____/| $$      | $$| $$      | $$| $$_____/| $$      
-| $$$$$$$$| $$ | $$ | $$|  $$$$$$$| $$| $$         \  $/  |  $$$$$$$| $$      | $$| $$      | $$|  $$$$$$$| $$      
-|________/|__/ |__/ |__/ \_______/|__/|__/          \_/    \_______/|__/      |__/|__/      |__/ \_______/|__/      
--------------------------------------------------------------------------------------------------------------------
-'''
-
-#IPGeolocation Banner
-ipgeobanner = '''
- /$$$$$$ /$$$$$$$          /$$$$$$  /$$$$$$$$  /$$$$$$ 
-|_  $$_/| $$__  $$        /$$__  $$| $$_____/ /$$__  $$
-  | $$  | $$  \ $$       | $$  \__/| $$      | $$  \ $$
-  | $$  | $$$$$$$//$$$$$$| $$ /$$$$| $$$$$   | $$  | $$
-  | $$  | $$____/|______/| $$|_  $$| $$__/   | $$  | $$
-  | $$  | $$             | $$  \ $$| $$      | $$  | $$
- /$$$$$$| $$             |  $$$$$$/| $$$$$$$$|  $$$$$$/
-|______/|__/              \______/ |________/ \______/ 
--------------------------------------------------------'''
-
-#List Banners
-###########################################################
-
-#Main tool list
-tool_list = '''
-1) PhoneKit
-2) Shodan Crawler
-3) IP geolocation
-4) Database Lookup
-5) Email Verifier
-'''
-#intelx capabilities banner
-list2 = '''
-In this module you can search for any of those
-----------------------------------------------
-Email address       Ethereum address
-Domain              MAC address
-URL                 IPFS Hash
-IP Addresses        Credit Card Number
-Phone Numbers       Social Security Number
-Bitcoin address     IBAN
-----------------------------------------------
-'''
+import Banners
+import apis
 
 #Defining needed Functions
 #########################################################
@@ -124,7 +23,7 @@ def Phone():
     def NPHONE():
         Found = False
         os.system("clear")
-        print(bannerphone)
+        print(Banners.bannerphone)
         to_find = input("Enter Name Of Your Target: ")
         os.system("clear")
         with open("FB19.txt", encoding="utf8") as a_file:
@@ -167,7 +66,7 @@ def Phone():
     def PhoneN():
         Found = False
         os.system("clear")
-        print(bannerphone)
+        print(Banners.bannerphone)
         to_find = input("Enter The Phone number Of Your Target(include +962): ")
         os.system("clear")
         with open("FB19.txt", encoding="utf8") as a_file:
@@ -205,10 +104,10 @@ def Phone():
                         Phone()
     def truecaller():
         os.system("clear")
-        print(bannerphone)
+        print(Banners.bannerphone)
         numtosearch = str(input("Enter the number you want to search: "))
         country = str(input("Enter the country identifier example [CA]: "))
-        xlist = search_phonenumber(numtosearch,country, TRUECALLER_ID)
+        xlist = search_phonenumber(numtosearch,country, apis.TRUECALLER_ID)
         print("-------------------------------------")
         print(" ")
         print("Access: ", xlist["data"][0]["access"])
@@ -221,7 +120,7 @@ def Phone():
         if choice2 =="back":
             os.system("python hive.py")
 
-    print(bannerphone)
+    print(Banners.bannerphone)
     print("1: Name To Phone Number Finder")
     print("2: Phone Number To Name Finder")
     print("3: Truecaller phone number lookup")
@@ -239,9 +138,9 @@ def Phone():
 #shodan module
 #--------------
 def shodancrawl():
-    print(bannershod)
+    print(Banners.bannershod)
     ip = input("Enter the IP address you want to search for: ")
-    api = shodan.Shodan(SHODAN_API_KEY)
+    api = shodan.Shodan(apis.SHODAN_API_KEY)
     results = api.host(ip)
     yaml_data = yaml.safe_dump(results, default_flow_style=False)
     print(yaml_data)
@@ -255,7 +154,7 @@ def shodancrawl():
 #IP geolocation Module
 #------------------------
 def geo():
-    print(ipgeobanner)
+    print(Banners.ipgeobanner)
     def get_location():
         ip = input("Enter the IP of your Target: ")
         response = requests.get(f'https://ipapi.co/{ip}/json/').json()
@@ -275,10 +174,10 @@ def geo():
 #------------------------
 def intel():
     os.system("clear")
-    print(list2)
+    print(Banners.list2)
     target2 = str(input("Enter the query you want to search: "))
     os.system("clear")
-    os.system("python Extras/intel.py -search "+ target2+" -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey " +INTELX_API+ " -limit 100")
+    os.system("python Extras/intel.py -search "+target2+" -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey " +apis.INTELX_API+ " -limit 100")
     print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
     back = input("type back to go back to the hive menu: ")
     if back =="back":
@@ -287,9 +186,9 @@ def intel():
 #Email Verifier Module
 #------------------------
 def emver():
-    print(emvbanner)
+    print(Banners.emvbanner)
     email = input('Enter the email you want verified: ')
-    url = f'https://api.hunter.io/v2/email-verifier?email={email}&api_key={HUNTER_API}'
+    url = f'https://api.hunter.io/v2/email-verifier?email={email}&api_key={apis.HUNTER_API}'
     response = requests.get(url)
     data = response.json()
     status = data['data']['result']
@@ -300,13 +199,21 @@ def emver():
     back = input("Type back to go back to the main menu: ")
     if back =="back":
         os.system("python hive.py")
+
+#integrated Sherlock module
+def sher():
+    print(Banners.sherbanner)
+    target = input("Enter the username of your target: ")
+    os.system("clear")
+    os.system("python Extras/sherlock/sherlock/sherlock.py "+target+" --nsfw -fo Sherlock_Output")
+
 ###########################################################################
 
 #script start
 #------------------------
 os.system("clear")
-print(bannermain)
-print(tool_list)
+print(Banners.bannermain)
+print(Banners.tool_list)
 print("type exit to exit the script")
 choice1 = input("Enter The Number of The Module you want to use: ")
 
@@ -329,6 +236,10 @@ if choice1 == "4":
 if choice1 =="5":
     os.system("clear")
     emver()
+
+if choice1 =="6":
+    os.system("clear")
+    sher()
 else:
     print("Sad to see you go :(")
     exit()
