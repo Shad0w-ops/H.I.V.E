@@ -67,8 +67,8 @@ This module can be used to find usernames across many social networks and saves 
 
 ### 7) Metadata
 
-This module is used to find the metadata of PDF, Image & video files to use it put your target file in the Meta folder in its designated area
-then provide the script with the name of the file (include extention) and you will get the metadata output.
+This module is used to find the metadata of any file you provide for example (camera lense, dimensions, location, etc...)
+to use this module just provide the full path of the file or just drag and drop the file onto the terminal and hit Enter
 
 ## API Status Table
 
