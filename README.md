@@ -57,6 +57,10 @@ The database lookup module utilises the IntelX API to search for a given query i
 
 (NOTE) the output may not be complete and in that case take the id of the leak and search for it in the INTELX website and search for your query in the database to find that exact term/query.
 
+In this module you can search for:
+
+Email addresses, Domains, URLs, IP Addresses, Phone Numbers, Bitcoin addresses, MAC addresses, IPFS Hashes, Credit Card Numbers, IBANs and Ethereum addresses
+
 ### 5) Email Verifier
 
 This module utilises the Hunter.io API and allows you to check if an email address exists, this can be used to check which emails are valid after bruteforcing a partially redacted email address.
