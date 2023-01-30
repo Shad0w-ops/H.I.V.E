@@ -2,7 +2,7 @@
 
 ![hive-logo-design-vector-illustration_742779-462](https://user-images.githubusercontent.com/43708460/214978101-913b56fb-e637-460a-98cd-1f1a38822191.jpg)
 
-H.I.V.E OSINT automation tool 
+H.I.V.E OSINT automation multi tool 
 
 (DISCLAIMER)
 This tool is made for educational purposes only, and i wont be held responsible for any missuse of this tool.
