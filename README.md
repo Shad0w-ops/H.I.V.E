@@ -85,4 +85,4 @@ to use this module just provide the full path of the file or just drag and drop 
 (NOTE) Educational means that there is a better subscription plan for free that they provide for accounts created with student Emails (.edu)
 
 ## HIVE Flow Diagram
-![hive](https://user-images.githubusercontent.com/43708460/215423181-293d8f4e-3021-412f-a1b0-df99e02556ae.jpeg)
+![hive (1)](https://user-images.githubusercontent.com/43708460/215424218-987e73c5-132a-4db4-9974-c7567a712adc.jpeg)
