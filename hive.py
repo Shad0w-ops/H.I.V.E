@@ -14,7 +14,7 @@ import yaml
 import Banners
 import apis
 import subprocess
-
+import time
 #Defining needed Functions
 #########################################################
 
@@ -227,14 +227,35 @@ def meta():
     back = input("type back to back to the main menu: ")
     if back =="back":
         os.system("python hive.py")
+
+#anonsurf start
+def anon():
+    print("Anonymizing session...")
+    os.system("anonsurf start")
+    print("You are now in a TOR tunnel :)")
+    time.sleep(2)
+
+#anonsurf Stop
+def anoff():
+    os.system("clear")
+    print("Exiting TOR tunnel...")
+    os.system("anonsurf stop")
+
+#anonsurf Change
+def anonchange():
+    os.system("anonsurf change")
+    os.system("python hive.py")
 ###########################################################################
 
 #script start
 #------------------------
 os.system("clear")
+anon()
+os.system("clear")
 print(Banners.bannermain)
 print(Banners.tool_list)
 print("type exit to exit the script")
+print("type change to change yout TOR Identity")
 print("--------------------------------------------")
 choice1 = input("Enter The Number of The Module you want to use: ")
 
@@ -265,6 +286,10 @@ if choice1 =="6":
 if choice1 =="7":
     os.system("clear")
     meta()
+
+if choice1 =="change":
+    anonchange()
+
 else:
-    print("Sad to see you go :(")
+    anoff()
     exit()
