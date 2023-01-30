@@ -83,3 +83,6 @@ to use this module just provide the full path of the file or just drag and drop 
 |Hunter API|hunter.io|Free, Paid|
 
 (NOTE) Educational means that there is a better subscription plan for free that they provide for accounts created with student Emails (.edu)
+
+## HIVE Flow Diagram
+![hive](https://user-images.githubusercontent.com/43708460/215423181-293d8f4e-3021-412f-a1b0-df99e02556ae.jpeg)
