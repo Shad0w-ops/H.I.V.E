@@ -1,6 +1,6 @@
 # H.I.V.E
 
-![hive-logo-design-vector-illustration_742779-462](https://user-images.githubusercontent.com/43708460/214978101-913b56fb-e637-460a-98cd-1f1a38822191.jpg)
+![lol](https://user-images.githubusercontent.com/43708460/215424857-d42f836d-782c-4db8-a66c-8c3af78bc960.jpg)
 
 H.I.V.E OSINT automation multi tool 
 
