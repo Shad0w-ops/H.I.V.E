@@ -9,7 +9,7 @@ This tool is made for educational purposes only, and i wont be held responsible 
 
 ## installation (Linux)
 
-    pip3 install -r requirements.txt
+    python3 setup.py
 
  Edit the apis.py file by adding your APIs In the following format
 
@@ -29,7 +29,7 @@ for your truecaller ID run:
 and follow the steps to get your ID
 if you cant see it run:
 
-    truecallerpy --installationid
+    truecallerpy -i
 
 ## Running the application
 
