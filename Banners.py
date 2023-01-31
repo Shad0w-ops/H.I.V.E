@@ -90,11 +90,11 @@ meta = '''
 
 #Main tool list
 tool_list = '''
-1) PhoneKit         6) Sherlock
-2) Shodan Crawler   7) Metadata
-3) IP geolocation
-4) Database Lookup
-5) Email Verifier
+1) PhoneKit       |  6) Sherlock
+2) Shodan Crawler |  7) Metadata
+3) IP geolocation |  8) Misc
+4) Database Lookup|
+5) Email Verifier |
 '''
 #intelx capabilities banner
 list2 = '''
@@ -107,4 +107,14 @@ IP Addresses        Credit Card Number
 Phone Numbers       Social Security Number
 Bitcoin address     IBAN
 ----------------------------------------------
+'''
+
+miscbanner = '''
+1) Show your current IP address
+2) Start anonymous mode
+3) check anonymous mode status
+4) Stop anonymous mode
+5) Change anonymous mode identity
+
+type back to back to the main menu
 '''
