@@ -17,7 +17,7 @@
    * [6) Sherlock](#6-sherlock)
    * [7) Metadata](#7-metadata)
    * [8) Misc](#8-misc)
-      * [1) Show IP:](#1-Show-my-IP)
+      * [1) Show current IP:](#1-Show-current-IP)
       * [2) Start Anonymous Mode:](#2-start-anonymous-mode)
       * [3) Check Anonymous mode status:](#3-check-anonymous-mode-status)
       * [4) Stop Anonymous Mode:](#4-stop-anonymous-mode)
@@ -97,7 +97,7 @@ to use this module just provide the full path of the file or just drag and drop 
 ### 8) Misc
 <ul>
   
-#### 1) Show my IP: 
+#### 1) Show current IP: 
 
 This module shows your current public IP address
 
