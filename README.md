@@ -3,7 +3,7 @@
 ![New Project (1)](https://user-images.githubusercontent.com/43708460/215883692-c6e63445-f9cd-4757-bfbc-f91c176aa63a.jpg)
 
 
-## Disclaimer: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
+### Disclaimer: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
 ## Table Of Contents
 
