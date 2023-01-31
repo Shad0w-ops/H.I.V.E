@@ -98,4 +98,4 @@ if you think your identity got leaked you can use this to change the TOR circuit
 (NOTE) Educational means that there is a better subscription plan for free that they provide for accounts created with student Emails (.edu)
 
 ## HIVE Flow Diagram
-![hive (1)](https://user-images.githubusercontent.com/43708460/215424218-987e73c5-132a-4db4-9974-c7567a712adc.jpeg)
+![hive](https://user-images.githubusercontent.com/43708460/215874114-3ead445a-c12c-4634-949e-13b9f91fdd68.png)
