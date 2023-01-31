@@ -7,6 +7,27 @@ H.I.V.E OSINT automation multi tool
 (DISCLAIMER)
 This tool is made for educational purposes only, and i wont be held responsible for any missuse of this tool.
 
+## Table Of Contents
+
+* [installation (Linux)](#installation-linux)
+* [Running the application](#running-the-application)
+* [Module Breakdown](#module-breakdown)
+   * [1) Phonekit:](#1-phonekit)
+   * [2) Shodan Crawler:](#2-shodan-crawler)
+   * [3) IP Geolocation:](#3-ip-geolocation)
+   * [4) Database Lookup:](#4-database-lookup)
+   * [5) Email Verifier](#5-email-verifier)
+   * [6) Sherlock](#6-sherlock)
+   * [7) Metadata](#7-metadata)
+   * [8) Misc](#8-misc)
+      * [1) Show IP:](#1-show-ip)
+      * [2) Start Anonymous Mode:](#2-start-anonymous-mode)
+      * [3) Check Anonymous mode status:](#3-check-anonymous-mode-status)
+      * [4) Stop Anonymous Mode:](#4-stop-anonymous-mode)
+      * [5) Change anonymous mode identity:](#5-change-anonymous-mode-identity)
+* [API Status Table](#api-status-table)
+* [HIVE Flow Diagram](#hive-flow-diagram)
+
 ## installation (Linux)
 
     python3 setup.py
