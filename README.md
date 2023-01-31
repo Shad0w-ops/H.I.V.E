@@ -7,6 +7,7 @@
 ## Table Of Contents
 
 * [installation (Linux)](#installation-linux)
+     * [How to get Truecaller ID:](#How-to-get-Truecaller-ID)
 * [Running the application](#running-the-application)
 * [Module Breakdown](#module-breakdown)
    * [1) Phonekit:](#1-phonekit)
@@ -35,15 +36,15 @@
 
  Edit the apis.py file by adding your APIs In the following format
 
-SHODAN_API_KEY = "YOUR API KEY HERE"
+    SHODAN_API_KEY = "YOUR API KEY HERE"
 
-INTELX_API = "YOUR API KEY HERE"
+    INTELX_API = "YOUR API KEY HERE"
 
-HUNTER_API = "YOUR API KEY HERE"
+    HUNTER_API = "YOUR API KEY HERE"
 
-TRUECALLER_ID = "YOUR INSTALLATION ID HERE" 
+    TRUECALLER_ID = "YOUR INSTALLATION ID HERE" 
 
-(How to get Truecaller ID)
+## How to get Truecaller ID
 
 for your truecaller ID run:
 
