@@ -1,11 +1,7 @@
 # H.I.V.E
 
-![lol](https://user-images.githubusercontent.com/43708460/215424857-d42f836d-782c-4db8-a66c-8c3af78bc960.jpg)
 
-H.I.V.E OSINT automation multi tool 
-
-(DISCLAIMER)
-This tool is made for educational purposes only, and i wont be held responsible for any missuse of this tool.
+## Disclaimer: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
 ## Table Of Contents
 
