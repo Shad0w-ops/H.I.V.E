@@ -117,7 +117,7 @@ if you think your identity got leaked you can use this to change the TOR circuit
 |Intelx API|intelx.io|Free, Paid, Educational|
 |Hunter API|hunter.io|Free, Paid|
 
-(NOTE) Educational means that there is a better subscription plan for free that they provide for accounts created with student Emails (.edu)
+(NOTE) Educational means that there is a better subscription plan for free/discounted that they provide for accounts created with student Emails (.edu)
 
 ## HIVE Flow Diagram
 ![hive (2)](https://user-images.githubusercontent.com/43708460/215889147-25a2bed3-df29-40a0-8e7d-deba0934e97c.jpeg)
