@@ -2,8 +2,6 @@
 
 ![Untitled-1](https://user-images.githubusercontent.com/43708460/215892281-dd242251-909e-40b0-bcba-c932269ec482.png)
 
-
-
 ### Disclaimer: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
 ## Table Of Contents
