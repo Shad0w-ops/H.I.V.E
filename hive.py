@@ -228,34 +228,59 @@ def meta():
     if back =="back":
         os.system("python hive.py")
 
-#anonsurf start
-def anon():
-    print("Anonymizing session...")
-    os.system("anonsurf start")
-    print("You are now in a TOR tunnel :)")
-    time.sleep(2)
 
-#anonsurf Stop
-def anoff():
-    os.system("clear")
-    print("Exiting TOR tunnel...")
-    os.system("anonsurf stop")
-
-#anonsurf Change
-def anonchange():
-    os.system("anonsurf change")
-    os.system("python hive.py")
+def misc():
+    print(Banners.miscbanner)
+    print("----------------")
+    choice = input("Choose an option: ")
+    if choice == "1":
+        os.system("curl api.ipify.org")
+        print("")
+        back1 = input("type back to go to main menu: ")
+        if back1 =="back":
+            os.system("python hive.py")
+    if choice =="2":
+        print("Anonymizing session...")
+        print("----------------------")
+        print("")
+        os.system("anonsurf start")
+        print("You are now in a TOR tunnel :)")
+        time.sleep(2)
+        back1 = input("type back to go to main menu: ")
+        if back1 =="back":
+            os.system("python hive.py")
+    if choice =="3":
+        os.system("anonsurf status")
+        back1 = input("type back to go to main menu: ")
+        if back1 =="back":
+            os.system("python hive.py")
+    if choice =="4":
+        os.system("clear")
+        print("Exiting TOR tunnel...")
+        os.system("anonsurf stop")
+        back1 = input("type back to go to main menu: ")
+        if back1 =="back":
+            os.system("python hive.py")
+    if choice =="5":
+        os.system("anonsurf change")
+        back1 = input("type back to go to main menu: ")
+        if back1 =="back":
+            os.system("python hive.py")
+    if choice =="back":
+        os.system("python hive.py")
+    else:
+        print("invalid input")
+        time.sleep(3)
+        os.system("clear")
+        misc()
 ###########################################################################
 
 #script start
 #------------------------
 os.system("clear")
-anon()
-os.system("clear")
 print(Banners.bannermain)
 print(Banners.tool_list)
 print("type exit to exit the script")
-print("type change to change yout TOR Identity")
 print("--------------------------------------------")
 choice1 = input("Enter The Number of The Module you want to use: ")
 
@@ -287,9 +312,11 @@ if choice1 =="7":
     os.system("clear")
     meta()
 
-if choice1 =="change":
-    anonchange()
+if choice1 =="8":
+    os.system("clear")
+    misc()
 
 else:
-    anoff()
-    exit()
+    print("Invalid Input")
+    time.sleep(3)
+    os.system("python hive.py")
