@@ -10,6 +10,10 @@
 * [Running the application](#running-the-application)
 * [Module Breakdown](#module-breakdown)
    * [1) Phonekit:](#1-phonekit)
+      * [1) Name To Phone Number Lookup](#1-Name-To-Phone-Number-Lookup)
+      * [2) Phone Number To Name Lookup](#2-Phone-Number-To-Name-Lookup)
+      * [3) Truecaller Reverse Lookup](#3-Truecaller-Reverse-Lookup)
+     
    * [2) Shodan Crawler:](#2-shodan-crawler)
    * [3) IP Geolocation:](#3-ip-geolocation)
    * [4) Database Lookup:](#4-database-lookup)
@@ -58,6 +62,13 @@ if you cant see it run:
 ### 1) Phonekit:
 
 Phonekit allows you to get someones phone number from their name and vice versa using a database called FB19.txt in addition to having a builtin truecaller module to reverse lookup phone numbers without the database.
+<ul>
+
+#### 1) Name To Phone Number Lookup
+#### 2) Phone Number To Name Lookup
+#### 3) Truecaller Reverse Lookup
+
+</ul>
 
 (NOTE) this module will not fully work without the FB19.txt database (which is not and will not provided)
 
