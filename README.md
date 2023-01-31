@@ -62,15 +62,17 @@ if you cant see it run:
 
 Phonekit allows you to get someones phone number from their name and vice versa using a database called FB19.txt in addition to having a builtin truecaller module to reverse lookup phone numbers without the database.
 
-(NOTE) this module will not fully work without the FB19.txt database (which is not provided)
+(NOTE) this module will not fully work without the FB19.txt database (which is not and will not provided)
 
 ### 2) Shodan Crawler:
 
 The shodan crawler utilises the shodan API to generate YAML formatted reports on a given IP address passively and saves the report in the Shodan_Output folder.
 
+This module can be used to do research on a webserver and get most information needed to develop an attack passivly, meaning the webserver itself wont notice if someone is gathering information on it, as no data is being sent to the webserver.
+
 ### 3) IP Geolocation:
 
-The IP geolocation module gives you an esimated location for a given IP address.
+The IP geolocation module gives you an esimated location for a given IP address this module is not percise the best it can do is get the country and city.
 
 ### 4) Database Lookup:
 
