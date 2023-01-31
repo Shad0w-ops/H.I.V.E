@@ -80,6 +80,7 @@ to use this module just provide the full path of the file or just drag and drop 
 Note: This module can make other modules and tools not work properly while using it
 #### 3) Check Anonymous mode status: Checks if anonymous mode is active or disabled
 #### 4) Stop Anonymous Mode: Stops anonymous mode (You can use this to stop the module if other tools stop working.) 
+#### 5) Change anonymous mode identity: if you think your identity got leaked you can use this to change the TOR circuit that you are currently using
 ## API Status Table
 
 |API|Website|Status|
