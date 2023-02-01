@@ -115,6 +115,13 @@ miscbanner = '''
 3) check anonymous mode status
 4) Stop anonymous mode
 5) Change anonymous mode identity
+6) Spoof Your MAC Address
 
 type back to back to the main menu
+'''
+
+macchange = '''
+1) Change MAC addres to a random MAC address
+2) Change MAC address to a specific MAC address
+3) Reset MAC address to the original MAC address
 '''
