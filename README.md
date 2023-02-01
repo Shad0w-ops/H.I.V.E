@@ -25,6 +25,7 @@
       * [3) Check Anonymous mode status:](#3-check-anonymous-mode-status)
       * [4) Stop Anonymous Mode:](#4-stop-anonymous-mode)
       * [5) Change anonymous mode identity:](#5-change-anonymous-mode-identity)
+      * [6) Spoof your MAC address:](#6-Spoof-your-MAC-address)
 * [API Status Table](#api-status-table)
 * [HIVE Flow Diagram](#hive-flow-diagram)
 
@@ -121,6 +122,7 @@ Checks if anonymous mode is active or disabled
 Stops anonymous mode (You can use this to stop the module if other tools stop working.) 
 #### 5) Change anonymous mode identity:
 if you think your identity got leaked you can use this to change the TOR circuit that you are currently using
+#### 6) Spoof your MAC address
 
 </ul>
 
