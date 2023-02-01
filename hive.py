@@ -135,6 +135,11 @@ def Phone():
         truecaller()
     if choice2 == "back":
         os.system("python hive.py")
+    else:
+        print("invalid input")
+        time.sleep(1)
+        os.system("clear")
+        Phone()
 
 #shodan module
 #--------------
@@ -266,8 +271,29 @@ def misc():
         back1 = input("type back to go to main menu: ")
         if back1 =="back":
             os.system("python hive.py")
+    if choice =="6":
+        os.system("clear")
+        print(Banners.macchange)
+        macad = input("Choose an option: ")
+        if macad =="1":
+            device_name = input("Enter the name of the device: ")
+            os.system("macchanger -r "+device_name)
+            back2 = input("type back to go back to the main menu: ")
+            os.system("python hive.py")
+        if macad =="2":
+            dev_name = str(input("Enter the device name: "))
+            macspoof = str(input("Enter the MAC address you want to change to: "))
+            os.system("macchanger -m "+macspoof+ " " +dev_name)
+            back3 = input("type back to go back to the main menu: ")
+            os.system("python hive.py")
+        if macad =="3":
+            deviname = input("Enter the name of the device: ")
+            os.system("macchanger -p "+deviname)
+            back4 = input("Type back to go back to the main menu: ")
+            os.system("python hive.py")
     if choice =="back":
         os.system("python hive.py")
+
     else:
         print("invalid input")
         time.sleep(3)
@@ -315,6 +341,10 @@ if choice1 =="7":
 if choice1 =="8":
     os.system("clear")
     misc()
+
+if choice1 =="exit":
+    os.system("clear")
+    exit()
 
 else:
     print("Invalid Input")
