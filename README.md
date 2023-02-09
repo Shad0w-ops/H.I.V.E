@@ -71,7 +71,7 @@ Phonekit allows you to get someones phone number from their name and vice versa 
 
 </ul>
 
-(NOTE) this module will not fully work without the FB19.txt database (which is not and will not provided)
+(NOTE) this module will not fully work without the FB19.txt database (which is not and will not be provided)
 
 ### 2) Shodan Crawler:
 
