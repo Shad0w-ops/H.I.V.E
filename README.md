@@ -35,6 +35,8 @@
 
 ## installation (Linux)
 
+    pip3 install -r requrements.txt
+    
     python3 setup.py
 ### Note: This tool has only been tested on kali linux.
 
