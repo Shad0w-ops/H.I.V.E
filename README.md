@@ -12,7 +12,7 @@
      * [How to get Truecaller ID](#How-to-get-Truecaller-ID)
 * [Running the application](#running-the-application)
 * [Module Breakdown](#module-breakdown)
-   * [1) Truecaller Reverse Lookup:](#1-truecaller-reverse-lookup)
+   * [1) Truecaller Reverse Lookup](#1-truecaller-reverse-lookup)
    * [2) Shodan Crawler](#2-shodan-crawler)
    * [3) IP Geolocation](#3-ip-geolocation)
    * [4) IntelX Database Lookup](#4-database-lookup)
