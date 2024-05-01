@@ -34,13 +34,11 @@
 
  Edit the vars.py file by adding your APIs In the following format
 
-    SHODAN_API_KEY = "YOUR API KEY HERE"
-
-    INTELX_API = "YOUR API KEY HERE"
-
-    HUNTER_API = "YOUR API KEY HERE"
-
-    TRUECALLER_ID = "YOUR INSTALLATION ID HERE"
+    SHODAN_API = ''
+    INTELX_API = ''
+    HUNTER_API = ''
+    TRUECALLER_ID = ''
+    DBFILE = ''
 
 Or simply use the new define function in the script
 
