@@ -9,18 +9,19 @@
 ## Table Of Contents
 
 * [installation (Linux)](#installation-linux)
-     * [How to get Truecaller ID:](#How-to-get-Truecaller-ID)
+     * [How to get Truecaller ID](#How-to-get-Truecaller-ID)
 * [Running the application](#running-the-application)
 * [Module Breakdown](#module-breakdown)
-   * [1) Truecaller Reverse Lookup:](#Truecaller-Reverse-Lookup)
+   * [1) Truecaller Reverse Lookup:](#1-truecaller-reverse-lookup)
    * [2) Shodan Crawler](#2-shodan-crawler)
    * [3) IP Geolocation](#3-ip-geolocation)
-   * [4) Database Lookup](#4-database-lookup)
+   * [4) IntelX Database Lookup](#4-database-lookup)
    * [5) Email Verifier](#5-email-verifier)
    * [6) Sherlock](#6-sherlock)
-   * [7) Misc](#8-misc)
-      * [1) Anonymous Mode](#anonymous-mode)
-      * [2) Spoof your MAC address](#Spoof-your-MAC-address)
+   * [7) Misc](#7-misc)
+      * [1) Anonymous Mode](#1-anonymous-mode)
+      * [2) Spoof your MAC address](#2-spoof-your-mac-address)
+   * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
 * [API Status Table](#api-status-table)
 * [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 
@@ -107,7 +108,7 @@ Allows you to enter commands for anonsurf/tor-router to activate system-wide tor
 
 In this module you can change your MAC address to a random or specific MAC address.
 
-###8) CredFetch (previously known as Phonekit)
+### 8) CredFetch (previously Phonekit)
 
 This module has been completely revised and now neatly sorts all data extracted from each single line, allows the user to search for names, phone numbers, and emails within a text database, and the ability to filter data more efficiently has been added as well.
 
