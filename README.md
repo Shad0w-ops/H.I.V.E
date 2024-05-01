@@ -1,16 +1,16 @@
 ![Untitled-1](https://user-images.githubusercontent.com/43708460/215892281-dd242251-909e-40b0-bcba-c932269ec482.png)
 
 
-[![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg)](https://www.python.org/)
-<img src="https://img.shields.io/badge/Developed%20&%20tested%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet">
+[![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg?style=for-the-badge)](https://www.python.org/)
+![Develope & tested on Kali Linux & Black Arch](https://img.shields.io/badge/Developed%20&%20tested%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet.svg?style=for-the-badge)
 
 ### **DISCLAIMER**: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
 ## Table Of Contents
 
 * [Installation (Linux)](#installation-linux)
-     * [How to get Truecaller ID](#How-to-get-Truecaller-ID)
-* [Running the application](#running-the-application)
+     * [How to get Truecaller ID](#how-to-get-truecaller-id)
+* [Running the script](#running-the-script)
 * [Module Breakdown](#module-breakdown)
    * [1) Truecaller Reverse Lookup](#1-truecaller-reverse-lookup)
    * [2) Shodan Crawler](#2-shodan-crawler)
@@ -135,3 +135,12 @@ In the future, regex will be used to better sort text databases of all kinds.
 ## HIVE Flow Diagram
 ![hive (2)](https://user-images.githubusercontent.com/43708460/215889147-25a2bed3-df29-40a0-8e7d-deba0934e97c.jpeg)
 
+---
+
+# Credits
+* [Truecallerpy](https://github.com/sumithemmadi/truecallerpy)
+* [Shodan-Python](https://github.com/achillean/shodan-python)
+* [Geocoder](https://github.com/DenisCarriere/geocoder)
+* [IntelligenceX](https://intelx.io/)
+* [Hunter.io](https://hunter.io/)
+* [Sherlock](https://github.com/sherlock-project/sherlock)
