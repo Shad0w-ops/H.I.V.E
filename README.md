@@ -2,7 +2,7 @@
 
 
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg)](https://www.python.org/)
-<img src="https://img.shields.io/badge/Developed%20on-kali%20linux%20&%20black%20arch-blueviolet">
+<img src="https://img.shields.io/badge/Developed%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet">
 
 ### **DISCLAIMER**: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
@@ -22,7 +22,7 @@
       * [1) Anonymous Mode](#1-anonymous-mode)
       * [2) Spoof your MAC address](#2-spoof-your-mac-address)
    * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
-* [API Status Table](#api-status-table)
+* [API Account Options Table](#api-account-options-table)
 * [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 
 ## Installation (Linux)
