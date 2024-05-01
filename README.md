@@ -4,11 +4,11 @@
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg)](https://www.python.org/)
 <img src="https://img.shields.io/badge/Developed%20on-kali%20linux%20&%20black%20arch-blueviolet">
 
-### Disclaimer: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
+### **DISCLAIMER**: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
 ## Table Of Contents
 
-* [installation (Linux)](#installation-linux)
+* [Installation (Linux)](#installation-linux)
      * [How to get Truecaller ID](#How-to-get-Truecaller-ID)
 * [Running the application](#running-the-application)
 * [Module Breakdown](#module-breakdown)
@@ -25,7 +25,7 @@
 * [API Status Table](#api-status-table)
 * [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 
-## installation (Linux)
+## Installation (Linux)
 
     pip3 install -r requirements.txt
     
@@ -56,27 +56,29 @@ or
 
     truecallerpy --installationid
 
-## Running the application
+## Running the script
+
+You can run the script using the following command:
 
     sudo python3 hive.py
 
 ## Module Breakdown
 
-### 1) Truecaller Reverse Lookup:
+### 1) Truecaller Reverse Lookup
 
 Truecaller Reverse Lookup allows you to reverse-search any phone number and extract data such as their name directly from the truecaller remote servers.
 
-### 2) Shodan Crawler:
+### 2) Shodan Crawler
 
 The shodan crawler utilises the shodan API to generate YAML formatted reports on a given IP address passively and saves the report in the Shodan_Output folder.
 
 This module can be used to do recon on a webserver and get most information needed to develop an attack passivly, meaning the webserver itself wont receive any requests from the attacker and will not be able to detect an attack.
 
-### 3) IP Geolocation:
+### 3) IP Geolocation
 
 The IP geolocation module gives you an esimated location for a given IP address. Due to the flawed nature of IP addresses this module will not provide a 100% accurate location, but it will provide the country and city. This module can also provide the user with their own public IP if the input field is left empty.
 
-### 4) IntelX Database Lookup:
+### 4) IntelX Database Lookup
 
 The database lookup module utilises the IntelX API to search for a given query in thousands of leaked databases
 
@@ -96,11 +98,11 @@ This module can be used to find usernames across many social networks and saves 
 
 ### 7) Misc
 
-#### 1) Anonymous Mode:
+#### 1) Anonymous Mode
 
 Allows you to enter commands for anonsurf/tor-router to activate system-wide tor-routing for improved privacy and security. Commands include: start, stop, restart/change and status.
 
-#### 2) Spoof your MAC address:
+#### 2) Spoof your MAC address
 
 In this module you can change your MAC address to a random or specific MAC address.
 
