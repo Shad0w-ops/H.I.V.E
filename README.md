@@ -15,7 +15,7 @@
    * [1) Truecaller Reverse Lookup](#1-truecaller-reverse-lookup)
    * [2) Shodan Crawler](#2-shodan-crawler)
    * [3) IP Geolocation](#3-ip-geolocation)
-   * [4) IntelX Database Lookup](#4-database-lookup)
+   * [4) IntelX Database Lookup](#4-intelx-database-lookup)
    * [5) Email Verifier](#5-email-verifier)
    * [6) Sherlock](#6-sherlock)
    * [7) Misc](#7-misc)
