@@ -141,6 +141,6 @@ In the future, regex will be used to better sort text databases of all kinds.
 * [Truecallerpy](https://github.com/sumithemmadi/truecallerpy)
 * [Shodan-Python](https://github.com/achillean/shodan-python)
 * [Geocoder](https://github.com/DenisCarriere/geocoder)
-* [IntelligenceX](https://intelx.io/)
+* [Intelx.py](https://github.com/zeropwn/intelx.py)
 * [Hunter.io](https://hunter.io/)
 * [Sherlock](https://github.com/sherlock-project/sherlock)
