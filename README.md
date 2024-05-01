@@ -30,19 +30,16 @@
     pip3 install -r requirements.txt
     
     python3 setup.py
-### Note: This tool has only been tested on kali linux.
 
- Edit the vars.py file by adding your APIs In the following format
+ Edit the vars.py file by adding your APIs In the following format:
 
-    SHODAN_API_KEY = "YOUR API KEY HERE"
+    SHODAN_API = ''
+    INTELX_API = ''
+    HUNTER_API = ''
+    TRUECALLER_ID = ''
+    DBFILE = ''
 
-    INTELX_API = "YOUR API KEY HERE"
-
-    HUNTER_API = "YOUR API KEY HERE"
-
-    TRUECALLER_ID = "YOUR INSTALLATION ID HERE"
-
-Or simply use the new define function in the script
+Or simply use the new define function in the script.
 
 ## How to get Truecaller ID
 
@@ -77,7 +74,7 @@ This module can be used to do recon on a webserver and get most information need
 
 ### 3) IP Geolocation:
 
-The IP geolocation module gives you an esimated location for a given IP address. Due to the flawed nature of IP addresses this module will not provide a 100% accurate location, but it will provide the country and city. This module can also provide the user with their public IP if the input field is left empty.
+The IP geolocation module gives you an esimated location for a given IP address. Due to the flawed nature of IP addresses this module will not provide a 100% accurate location, but it will provide the country and city. This module can also provide the user with their own public IP if the input field is left empty.
 
 ### 4) IntelX Database Lookup:
 
@@ -98,7 +95,6 @@ This module utilises the Hunter.io API and allows you to check if an email addre
 This module can be used to find usernames across many social networks and saves the output in the Sherlock_Output folder.
 
 ### 7) Misc
-
 
 #### 1) Anonymous Mode:
 
