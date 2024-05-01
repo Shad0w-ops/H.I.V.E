@@ -1,352 +1,283 @@
-## Author:       SHAD0W-0PS
+## Author:       SHAD0W-0PS, UX0l0l
 ## Script Name:  H.I.V.E
-## Start Date:   26.8.2022
-## End Date:     6/3/2023
+## Start Date:   26/8/2022
+## End Date:     --/--/----
 ## Purpose:      To automate some OSINT tasks
 
-#Importing the Modules
+# Importing the Modules
 import os
 import shodan
 import requests
-import json
 from truecallerpy import search_phonenumber
 import yaml
 import Banners
-import apis
-import subprocess
-import time
-#Defining needed Functions
+import vars
+import distro
+import geocoder
+
+clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
+
+# Defining necessary variables
+##############################
+def define():
+    clear()
+    print(Banners.bannermain)
+    with open('vars.py', 'r+') as file:
+        for line in file:
+            vals = line.split(" ")
+            print(vals[0] + ": " + vals[2])
+        print("Note: If not all inputs are filled then some features may not work")
+        SHODAN_API = input("Shodan API Key: ")
+        INTELX_API = input("IntelX API Key: ")
+        HUNTER_API = input("Hunter API Key: ")
+        TRUECALLER_ID = input("TrueCaller ID: ")
+        DBFILE = input("Text DB file path: ")
+    
+        file.truncate(0)  # Clear the file first
+        file.seek(0)
+        file.write(f"SHODAN_API = '{SHODAN_API}'\nINTELX_API = '{INTELX_API}'\nHUNTER_API = '{HUNTER_API}'\nTRUECALLER_ID = '{TRUECALLER_ID}'\nDBFILE = '{DBFILE}'\n")
+    main()
+
+# Defining needed Functions
 #########################################################
 
-#phonekit module
-#---------------
-def Phone():
-    def NPHONE():
-        Found = False
-        os.system("clear")
-        print(Banners.bannerphone)
-        to_find = input("Enter Name Of Your Target: ")
-        os.system("clear")
-        with open("FB19.txt", encoding="utf8") as a_file:
-                for line in a_file:
-                    if to_find in line:
-                        Found = True
-                        print("Target Found :)")
-                        print("--------------------")
-                        info = line.split(",,,")
-                        print(to_find +": "+ info[1])
-                        print("--------------------")
-                        print("other info: ")
-                        print(line)
-                        print("--------------------")
-                if Found:
-                    print("type main to go back to the HIVE menu")
-                    print("type back to go back to Phonekit menu")
-                    back = input("whats your next step?: ")
-                    if back == "main":
-                        os.system("clear")
-                        os.system("python hive.py")
-                    if back == "back":
-                        os.system("clear")
-                        Phone()
-                elif not Found:
-                    os.system("clear")
-                    print("target not found")
-                    print("--------------------")
-                    print("type main to go back to the HIVE menu")
-                    print("type back to go back to Phonekit menu")
-                    back = input("whats your next step?: ")
-                    if back == "main":
-                        os.system("clear")
-                        os.system("python hive.py")
-                    if back == "back":
-                        os.system("clear")
-                        Phone()
+def anon():
+    action = input("Enter the desired action {start|stop|change/restart|status}: ")
+    if action == "start":
+        os.system("anonsurf start" if distro.like() == "debian" else "tor-router start")
+    elif action == "stop":
+        os.system("anonsurf stop" if distro.like() == "debian" else "tor-router stop")
+    elif action == "change" or "restart":
+        os.system("anonsurf change" if distro.like() == "debian" else "tor-router restart")
+    elif action == "status":
+        os.system("anonsurf status" if distro.like() == "debian" else "systemctl status tor-router")
+    print("Your current IP is now " + geocoder.ip("me").ip)
+    input("Press enter to go back to the hive menu: ")
+    main()
 
+def CredFetch():
+    Found = False
+    clear()
+    print(Banners.credbanner)
+    to_find = input("Enter your search query (name, email, number, etc): ")
+    findlist = to_find.split(" ")
+    clear()
+    labels = ["User ID", "", "Email", "Phone Number", "Religion", "DOB", "First Name", "Last Name", "Gender", "Link", "Language", "Username", "Full Name", "Bio", "Workplace", "Job", "Hometown", "Location", "Education", "", "", "", "", "", "", "Relationship Status", "", "", "", "", "", "", "", "", ""]
+    with open(vars.DBFILE, encoding="utf8") as a_file:
+        i = 1
+        user_info_list = []
+        for line in a_file:
+            if all(elem in line.lower() for elem in findlist):
+                Found = True
+                info = line.split(",")
+                full_name = ""
+                phone_number = ""
+                for index, content in enumerate(info):
+                    if content and content != "0" and content != "" and content != "1/1/0001 12:00:00 AM" and not content.endswith("@facebook.com") and labels[index] and labels[index] != "":
+                        if labels[index] == "Full Name":
+                            full_name = content
+                        elif labels[index] == "Phone Number":
+                            phone_number = content
+                if full_name:
+                    user_info_list.append(info)
+                    print(f"{i}: {full_name} - Phone Number: {phone_number}")
+                    i += 1
+        if Found:
+            select = input("Select user(s) to print full information (e.g. '1 2 3' or type 'all'): ")
+            clear()
+            if select.lower() == "all":
+                selected_users = range(1, len(user_info_list) + 1)
+            else:
+                selected_users = [int(num) for num in select.split() if num.isdigit() and 0 < int(num) <= len(user_info_list)]
+            for user_num in selected_users:
+                selected_info = user_info_list[user_num - 1]
+                for index, content in enumerate(selected_info):
+                    if content and content != "0" and content != "" and content != "1/1/0001 12:00:00 AM" and not content.endswith("@facebook.com") and labels[index] and labels[index] != "":
+                        print(f"{labels[index]}: {content}")
+                print("--------------------")
+            input("Press enter to go back to the hive menu: ")
+            main()
+        else:
+            clear()
+            print("Target not found")
+            print("--------------------")
+            input("Press enter to go back to the hive menu: ")
+            main()
 
-    def PhoneN():
-        Found = False
-        os.system("clear")
-        print(Banners.bannerphone)
-        to_find = input("Enter The Phone number Of Your Target(include +962): ")
-        os.system("clear")
-        with open("FB19.txt", encoding="utf8") as a_file:
-                for line in a_file:
-                    if to_find in line:
-                        Found = True
-                        print("Target Found :)")
-                        print("--------------------")
-                        print(to_find)
-                        print("--------------------")
-                        print(line)
-                        print("--------------------")
-                if Found:
-                    print("type main to go back to the HIVE menu")
-                    print("type back to go back to Phonekit menu")
-                    back = input("whats your next step?: ")
-                    if back == "main":
-                        os.system("clear")
-                        os.system("python hive.py")
-                    if back == "back":
-                        os.system("clear")
-                        Phone()
-                elif not Found:
-                    os.system("clear")
-                    print("target not found")
-                    print("--------------------")
-                    print("type main to go back to the HIVE menu")
-                    print("type back to go back to Phonekit menu")
-                    back = input("whats your next step?: ")
-                    if back == "main":
-                        os.system("clear")
-                        os.system("python hive.py")
-                    if back == "back":
-                        os.system("clear")
-                        Phone()
-    def truecaller():
-        os.system("clear")
-        print(Banners.bannerphone)
-        numtosearch = str(input("Enter the number you want to search: "))
-        country = str(input("Enter the country identifier example [CA]: "))
-        xlist = search_phonenumber(numtosearch,country, apis.TRUECALLER_ID)
-        print("-------------------------------------")
-        print(" ")
-        print("Access: ", xlist["data"][0]["access"])
-        print("Name: ", xlist["data"][0]["name"])
-        print("Id: ", xlist["data"][0]["id"])
-        print("Phone: ", xlist["data"][0]["phones"][0]["e164Format"])
-        print("------------------------")
-        print("type back to go back to main menu")
-        choice2 = input("type in your choice: ")
-        if choice2 =="back":
-            os.system("python hive.py")
+def truecaller():
+    clear()
+    #print(Banners.bannerphone)
+    numtosearch = str(input("Enter the number you want to search: "))
+    country = input("Enter the country identifier example [CA]: ")
+    xlist = search_phonenumber(numtosearch, country, vars.TRUECALLER_ID)
+    print("-------------------------------------")
+    print(" ")
+    print("Access: ", xlist["data"][0]["access"])
+    print("Name: ", xlist["data"][0]["name"])
+    print("Id: ", xlist["data"][0]["id"])
+    print("Phone: ", xlist["data"][0]["phones"][0]["e164Format"])
+    print("------------------------")
+    print("type back to go back to main menu")
+    choice2 = input("type in your choice: ")
+    if choice2 =="back":
+        main()
 
-    print(Banners.bannerphone)
-    print("1: Name To Phone Number Finder")
-    print("2: Phone Number To Name Finder")
-    print("3: Truecaller phone number lookup")
-    print("Type back to go to back to the main menu")
-    choice2 = input("Choose an Option: ")
-    if choice2 =="1":
-        NPHONE()
-    if choice2 == "2":
-        PhoneN()
-    if choice2 == "3":
-        truecaller()
-    if choice2 == "back":
-        os.system("python hive.py")
-    else:
-        print("invalid input")
-        time.sleep(1)
-        os.system("clear")
-        Phone()
-
-#shodan module
+# Shodan module
 #--------------
 def shodancrawl():
     print(Banners.bannershod)
     ip = input("Enter the IP address you want to search for: ")
-    api = shodan.Shodan(apis.SHODAN_API_KEY)
+    api = shodan.Shodan(vars.SHODAN_API)
     results = api.host(ip)
     yaml_data = yaml.safe_dump(results, default_flow_style=False)
     print(yaml_data)
-    with open("Shodan_Output/{}.txt".format(ip), "w") as outfile:
+    with open(f"Shodan_Output/{ip}.txt", "w") as outfile:
         outfile.write(yaml_data)
-    print("Information about {} saved to file.".format(ip))
-    back = input("Type back to go back to the HIVE menu: ")
-    if back =="back":
-        os.system("python hive.py")
+    print(f"Information about {ip} saved to file.")
+    input("Press enter to go back to the hive menu: ")
+    main()
 
-#IP geolocation Module
+# IP geolocation Module
 #------------------------
 def geo():
     print(Banners.ipgeobanner)
-    def get_location():
-        ip = input("Enter the IP of your Target: ")
-        response = requests.get(f'https://ipapi.co/{ip}/json/').json()
-        location_data = {
-            "ip": ip,
-            "city": response.get("city"),
-            "region": response.get("region"),
-            "country": response.get("country_name")
-        }
-        return location_data
-    print(get_location())
-    back = input("type back to go back to the main menu: ")
-    if back =="back":
-        os.system("python hive.py")
+    ip = input("Enter the IP of your Target (leave empty to see yours): ")
+    print("Locating IP...")
+    response = geocoder.ip(ip).json.get("raw")
+    if response:
+        for key, value in response.items():
+            if key not in ["timezone", "readme"]:  # Exclude these keys
+                if key == "ip":
+                    print(f"IP: {value}")
+                elif key == "loc":
+                    print(f"Location: {value}")
+                elif key == "org":
+                    print(f"ISP: {value}")
+                else:
+                    print(f"{key.capitalize()}: {value}")
+    else:
+        print("No data found for the IP.")
+    input("Press enter to go back to the hive menu: ")
+    main()
 
-#Intelligencex API module
+# Intelligencex API module
 #------------------------
 def intel():
-    os.system("clear")
+    clear()
     print(Banners.list2)
     target2 = str(input("Enter the query you want to search: "))
-    os.system("clear")
-    os.system("python Extras/intel.py -search "+target2+" -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey " +apis.INTELX_API+ " -limit 100")
+    clear()
+    os.system("python Extras/intel.py -search " + target2 + " -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey " + vars.INTELX_API + " -limit 100")
     print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
-    back = input("type back to go back to the hive menu: ")
-    if back =="back":
-        os.system("python hive.py")
+    input("Press enter to go back to the hive menu: ")
+    main()
 
-#Email Verifier Module
+# Email Verifier Module
 #------------------------
 def emver():
     print(Banners.emvbanner)
     email = input('Enter the email you want verified: ')
-    url = f'https://api.hunter.io/v2/email-verifier?email={email}&api_key={apis.HUNTER_API}'
+    url = f'https://api.hunter.io/v2/email-verifier?email={email}&api_key={vars.HUNTER_API}'
     response = requests.get(url)
     data = response.json()
-    status = data['data']['result']
-    if status == 'deliverable':
-        print("The email "+email+" is valid")
+    status = data['data']['status']
+    if status == 'valid':
+        print("The email " + email + " is valid")
     else:
-        print("The email "+email+" is not valid")
-    back = input("Type back to go back to the main menu: ")
-    if back =="back":
-        os.system("python hive.py")
+        print("The email " + email + " is not valid")
+    input("Press enter to go back to the hive menu: ")
+    main()
 
-#integrated Sherlock module
+# integrated Sherlock module
 def sher():
     print(Banners.sherbanner)
     target = input("Enter the username of your target: ")
-    os.system("clear")
-    os.system("python Extras/sherlock/sherlock/sherlock.py "+target+" --nsfw -fo Sherlock_Output")
-    back = input("type back to back to the main menu: ")
-    if back =="back":
-        os.system("python hive.py")
+    clear()
+    os.system("python Extras/sherlock/sherlock/sherlock.py " + target + " --nsfw -fo Sherlock_Output")
+    input("Press enter to go back to the hive menu: ")
+    main()
 
+# TO BE USED IN A SEPERATE SCRIPT
 #metadata extractor module
-def meta():
-    print(Banners.meta)                        
-    infoDict = {}
-    exifToolPath = ("exiftool")
-    imgPath = input("Enter the path of your file: ")
-    process = subprocess.Popen([exifToolPath,imgPath],stdout=subprocess.PIPE, stderr=subprocess.STDOUT,universal_newlines=True) 
-    for tag in process.stdout:
-        line = tag.strip().split(':')
-        infoDict[line[0].strip()] = line[-1].strip()
-    for k,v in infoDict.items():
-        print(k,':', v)
-    print("-------------------------")
-    back = input("type back to back to the main menu: ")
-    if back =="back":
-        os.system("python hive.py")
-
+#def meta():
+#    print(Banners.meta)                        
+#    infoDict = {}
+#    exifToolPath = ("exiftool")
+#    imgPath = input("Enter the path of your file: ")
+#    process = subprocess.Popen([exifToolPath,imgPath], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True) 
+#    for tag in process.stdout:
+#        line = tag.strip().split(':')
+#        infoDict[line[0].strip()] = line[-1].strip()
+#    for k,v in infoDict.items():
+#        print(k,':', v)
+#    print("-------------------------")
+#    input("Press enter to go back to the hive menu: ")
+#    main()
 
 def misc():
     print(Banners.miscbanner)
     print("----------------")
     choice = input("Choose an option: ")
-    if choice == "1":
-        os.system("curl api.ipify.org")
-        print("")
-        back1 = input("type back to go to main menu: ")
-        if back1 =="back":
-            os.system("python hive.py")
+    if choice =="1":
+        anon()
     if choice =="2":
-        print("Anonymizing session...")
-        print("----------------------")
-        print("")
-        os.system("anonsurf start")
-        print("You are now in a TOR tunnel :)")
-        time.sleep(2)
-        back1 = input("type back to go to main menu: ")
-        if back1 =="back":
-            os.system("python hive.py")
-    if choice =="3":
-        os.system("anonsurf status")
-        back1 = input("type back to go to main menu: ")
-        if back1 =="back":
-            os.system("python hive.py")
-    if choice =="4":
-        os.system("clear")
-        print("Exiting TOR tunnel...")
-        os.system("anonsurf stop")
-        back1 = input("type back to go to main menu: ")
-        if back1 =="back":
-            os.system("python hive.py")
-    if choice =="5":
-        os.system("anonsurf change")
-        back1 = input("type back to go to main menu: ")
-        if back1 =="back":
-            os.system("python hive.py")
-    if choice =="6":
-        os.system("clear")
+        clear()
         print(Banners.macchange)
         macad = input("Choose an option: ")
+        dev_name = input("Enter the device name: ")
         if macad =="1":
-            device_name = input("Enter the name of the device: ")
-            os.system("macchanger -r "+device_name)
-            back2 = input("type back to go back to the main menu: ")
-            os.system("python hive.py")
+            os.system("macchanger -r -b " + dev_name)
+            input("Press enter to go back to the hive menu: ")
+            main()
         if macad =="2":
-            dev_name = str(input("Enter the device name: "))
             macspoof = str(input("Enter the MAC address you want to change to: "))
-            os.system("macchanger -m "+macspoof+ " " +dev_name)
-            back3 = input("type back to go back to the main menu: ")
-            os.system("python hive.py")
+            os.system("macchanger -m " + macspoof + " " + dev_name)
+            input("Press enter to go back to the hive menu: ")
+            main()
         if macad =="3":
-            deviname = input("Enter the name of the device: ")
-            os.system("macchanger -p "+deviname)
-            back4 = input("Type back to go back to the main menu: ")
-            os.system("python hive.py")
-    if choice =="back":
-        os.system("python hive.py")
+            os.system("macchanger -p " + dev_name)
+            input("Press enter to go back to the hive menu: ")
+            main()
+    input("Press enter to go back to the hive menu: ")
+    main()
 
-    else:
-        print("invalid input")
-        time.sleep(3)
-        os.system("clear")
-        misc()
 ###########################################################################
 
-#script start
+# Script start
 #------------------------
-os.system("clear")
-print(Banners.bannermain)
-print(Banners.tool_list)
-print("type exit to exit the script")
-print("--------------------------------------------")
-choice1 = input("Enter The Number of The Module you want to use: ")
+def main():
+    clear()
+    print(Banners.bannermain)
+    print(Banners.tool_list)
+    print("--------------------------------------------")
+    def modulechoice():
+        choice1 = input("Enter the number of the module you want to use: ").strip()
+        options = {
+            "1": truecaller,
+            "2": shodancrawl,
+            "3": geo,
+            "4": intel,
+            "5": emver,
+            "6": sher,
+            "7": misc,
+            "8": CredFetch,
+            "9": define,
+            "0": exit
+        }
 
-if choice1 == "1":
-    os.system("clear")
-    Phone()
+        if choice1 in options:
+            clear()
+            options[choice1]()
+        else:
+            print("Enter a valid module number!")
+            modulechoice()
+    modulechoice()
 
-if choice1 == "2":
-    os.system("clear")
-    shodancrawl()
 
-if choice1 == "3":
-    os.system("clear")
-    geo()
-
-if choice1 == "4":
-    os.system("clear")
-    intel()
-
-if choice1 =="5":
-    os.system("clear")
-    emver()
-
-if choice1 =="6":
-    os.system("clear")
-    sher()
-
-if choice1 =="7":
-    os.system("clear")
-    meta()
-
-if choice1 =="8":
-    os.system("clear")
-    misc()
-
-if choice1 =="exit":
-    os.system("clear")
-    exit()
-
-else:
-    print("Invalid Input")
-    time.sleep(3)
-    os.system("python hive.py")
+if __name__ == '__main__':
+    if os.geteuid() != 0:
+        exit("[*] Root privileges not present.\n[*] Run the script using 'sudo python3 hive.py'.")
+    elif any(value == '' for value in vars.__dict__.values()):
+        define()
+    else:
+        main()

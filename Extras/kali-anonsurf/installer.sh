@@ -16,7 +16,7 @@ apt-key add /tmp/i2p-debian-repo.key.asc # Import the key
 rm /tmp/i2p-debian-repo.key.asc # delete the temp key
 apt-get update # Update repos
 
-if [[ -n $(cat /etc/os-release |grep kali) ]]
+if [[ -n $(cat /etc/os-release | grep kali) ]]
 then
 	apt-get install libservlet3.0-java 
 	wget http://ftp.us.debian.org/debian/pool/main/j/jetty8/libjetty8-java_8.1.16-4_all.deb

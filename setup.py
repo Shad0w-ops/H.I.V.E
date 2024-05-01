@@ -4,10 +4,16 @@ from distutils.core import setup
 from os import path
 import os
 
-os.system("sudo apt install libimage-exiftool-perl")
+tools = ["macchanger"]
 os.system("pip3 install -r requirements.txt")
-os.system("bash Extras/kali-anonsurf/installer.sh")
-os.system("sudo apt install macchanger")
+import distro
+for tool in tools:
+    if distro.like() == "debian":
+        os.system("sh Extras/kali-anonsurf/installer.sh")
+        os.system("apt install " + tool)
+    elif distro.like() == "arch":
+        tools += "tor-router"
+        os.system("pacman -Sy " + tool)
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:

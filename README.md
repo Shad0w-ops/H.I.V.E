@@ -2,7 +2,7 @@
 
 
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg)](https://www.python.org/)
-<img src="https://img.shields.io/badge/Developed%20on-kali%20linux-blueviolet">
+<img src="https://img.shields.io/badge/Developed%20on-kali%20linux%20&%20black%20arch-blueviolet">
 
 ### Disclaimer: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
@@ -12,35 +12,26 @@
      * [How to get Truecaller ID:](#How-to-get-Truecaller-ID)
 * [Running the application](#running-the-application)
 * [Module Breakdown](#module-breakdown)
-   * [1) Phonekit:](#1-phonekit)
-      * [1) Name To Phone Number Lookup](#1-Name-To-Phone-Number-Lookup)
-      * [2) Phone Number To Name Lookup](#2-Phone-Number-To-Name-Lookup)
-      * [3) Truecaller Reverse Lookup](#3-Truecaller-Reverse-Lookup)
-     
+   * [1) Truecaller Reverse Lookup:](#Truecaller-Reverse-Lookup)
    * [2) Shodan Crawler](#2-shodan-crawler)
    * [3) IP Geolocation](#3-ip-geolocation)
    * [4) Database Lookup](#4-database-lookup)
    * [5) Email Verifier](#5-email-verifier)
    * [6) Sherlock](#6-sherlock)
-   * [7) Metadata](#7-metadata)
-   * [8) Misc](#8-misc)
-      * [1) Show current IP](#1-Show-current-IP)
-      * [2) Start Anonymous Mode](#2-start-anonymous-mode)
-      * [3) Check Anonymous mode status:](#3-check-anonymous-mode-status)
-      * [4) Stop Anonymous Mode](#4-stop-anonymous-mode)
-      * [5) Change anonymous mode identity](#5-change-anonymous-mode-identity)
-      * [6) Spoof your MAC address](#6-Spoof-your-MAC-address)
+   * [7) Misc](#8-misc)
+      * [1) Anonymous Mode](#anonymous-mode)
+      * [2) Spoof your MAC address](#Spoof-your-MAC-address)
 * [API Status Table](#api-status-table)
-* [HIVE Flow Diagram](#hive-flow-diagram)
+* [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 
 ## installation (Linux)
 
-    pip3 install -r requrements.txt
+    pip3 install -r requirements.txt
     
     python3 setup.py
 ### Note: This tool has only been tested on kali linux.
 
- Edit the apis.py file by adding your APIs In the following format
+ Edit the vars.py file by adding your APIs In the following format
 
     SHODAN_API_KEY = "YOUR API KEY HERE"
 
@@ -48,52 +39,50 @@
 
     HUNTER_API = "YOUR API KEY HERE"
 
-    TRUECALLER_ID = "YOUR INSTALLATION ID HERE" 
+    TRUECALLER_ID = "YOUR INSTALLATION ID HERE"
+
+Or simply use the new define function in the script
 
 ## How to get Truecaller ID
 
-for your truecaller ID run:
+For your truecaller ID run:
 
-    truecallerpy --login 
-and follow the steps to get your ID
-if you cant see it run:
+    truecallerpy login
+
+and follow the steps to get your ID.
+If you cant see your ID run:
 
     truecallerpy -i
 
+or
+
+    truecallerpy --installationid
+
 ## Running the application
 
-    python3 hive.py
+    sudo python3 hive.py
 
 ## Module Breakdown
 
-### 1) Phonekit:
+### 1) Truecaller Reverse Lookup:
 
-Phonekit allows you to get someones phone number from their name and vice versa using a database called FB19.txt in addition to having a builtin truecaller module to reverse lookup phone numbers without the database.
-<ul>
-
-#### 1) Name To Phone Number Lookup
-#### 2) Phone Number To Name Lookup
-#### 3) Truecaller Reverse Lookup
-
-</ul>
-
-(NOTE) this module will not fully work without the FB19.txt database (which is not and will not be provided)
+Truecaller Reverse Lookup allows you to reverse-search any phone number and extract data such as their name directly from the truecaller remote servers.
 
 ### 2) Shodan Crawler:
 
 The shodan crawler utilises the shodan API to generate YAML formatted reports on a given IP address passively and saves the report in the Shodan_Output folder.
 
-This module can be used to do research on a webserver and get most information needed to develop an attack passivly, meaning the webserver itself wont notice if someone is gathering information on it, as no data is being sent to the webserver.
+This module can be used to do recon on a webserver and get most information needed to develop an attack passivly, meaning the webserver itself wont receive any requests from the attacker and will not be able to detect an attack.
 
 ### 3) IP Geolocation:
 
-The IP geolocation module gives you an esimated location for a given IP address this module is not percise the best it can do is get the country and city.
+The IP geolocation module gives you an esimated location for a given IP address. Due to the flawed nature of IP addresses this module will not provide a 100% accurate location, but it will provide the country and city. This module can also provide the user with their public IP if the input field is left empty.
 
-### 4) Database Lookup:
+### 4) IntelX Database Lookup:
 
 The database lookup module utilises the IntelX API to search for a given query in thousands of leaked databases
 
-(NOTE) the output may not be complete and in that case take the id of the leak and search for it in the INTELX website and search for your query in the database to find that exact term/query.
+(NOTE) the output may not be complete and in that case take the id of the leak and search for it in the IntelX website and search for your query in the database to find that exact term/query.
 
 In this module you can search for:
 
@@ -107,42 +96,42 @@ This module utilises the Hunter.io API and allows you to check if an email addre
 
 This module can be used to find usernames across many social networks and saves the output in the Sherlock_Output folder.
 
-### 7) Metadata
+### 7) Misc
 
-This module is used to find the metadata of any file you provide for example (camera lense, dimensions, location, etc...)
-to use this module just provide the full path of the file or just drag and drop the file onto the terminal and hit Enter
 
-### 8) Misc
-<ul>
-  
-#### 1) Show current IP: 
+#### 1) Anonymous Mode:
 
-This module shows your current public IP address
+Allows you to enter commands for anonsurf/tor-router to activate system-wide tor-routing for improved privacy and security. Commands include: start, stop, restart/change and status.
 
-#### 2) Start Anonymous Mode:
-This module uses the anonsurf tool to tunnel all of your traffic through TOR servers 
+#### 2) Spoof your MAC address:
 
-Note: This module can make other modules and tools not work properly while using it
-#### 3) Check Anonymous mode status:
-Checks if anonymous mode is active or disabled
-#### 4) Stop Anonymous Mode:
-Stops anonymous mode (You can use this to stop the module if other tools stop working.) 
-#### 5) Change anonymous mode identity:
-if you think your identity got leaked you can use this to change the TOR circuit that you are currently using
-#### 6) Spoof your MAC address:
 In this module you can change your MAC address to a random or specific MAC address.
+
+###8) CredFetch (previously known as Phonekit)
+
+This module has been completely revised and now neatly sorts all data extracted from each single line, allows the user to search for names, phone numbers, and emails within a text database, and the ability to filter data more efficiently has been added as well.
+
+For example, if one wants to search for a certain John Doe, with an American or Canadian phone number, they could input the following text:
+
+    john doe +1
+
+Or if the user wants to find another John Doe that has a GMail address attatched, they can search:
+
+    john doe @gmail[.com]
+
+In the future, regex will be used to better sort text databases of all kinds.
 
 </ul>
 
-## API Status Table
+## API Account Options Table
 
 |API|Website|Status|
 |----|----|----|
-|Shodan API|Shodan.io|Free, Paid, Educational|
-|Intelx API|intelx.io|Free, Paid, Educational|
+|Shodan API|Shodan.io|Free, Paid, Academic|
+|Intelx API|intelx.io|Free, Paid, Academic|
 |Hunter API|hunter.io|Free, Paid|
 
-(NOTE) Educational means that there is a better subscription plan for free/discounted that they provide for accounts created with student Emails (.edu)
+(NOTE) Academic means that there is a better subscription plan for free/discounted that they provide for accounts created with student emails (.edu)
 
 ## HIVE Flow Diagram
 ![hive (2)](https://user-images.githubusercontent.com/43708460/215889147-25a2bed3-df29-40a0-8e7d-deba0934e97c.jpeg)
