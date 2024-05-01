@@ -2,7 +2,7 @@
 
 
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg)](https://www.python.org/)
-<img src="https://img.shields.io/badge/Developed%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet">
+<img src="https://img.shields.io/badge/Developed%20&%20tested%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet">
 
 ### **DISCLAIMER**: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
