@@ -1,4 +1,4 @@
-![Untitled-1](https://user-images.githubusercontent.com/43708460/215892281-dd242251-909e-40b0-bcba-c932269ec482.png)
+![H.I.V.E Logo](https://user-images.githubusercontent.com/43708460/215892281-dd242251-909e-40b0-bcba-c932269ec482.png)
 
 
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg?style=for-the-badge)](https://www.python.org/)
@@ -24,6 +24,7 @@
    * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
 * [API Account Options Table](#api-account-options-table)
 * [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
+* [Credits](#credits)
 
 ## Installation (Linux)
 
