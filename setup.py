@@ -2,18 +2,16 @@
 import setuptools
 from distutils.core import setup
 from os import path
-import os
+import os, distro
 
 tools = ["macchanger"]
 os.system("pip3 install -r requirements.txt")
-import distro
-for tool in tools:
-    if distro.like() == "debian":
-        os.system("sh Extras/kali-anonsurf/installer.sh")
-        os.system("apt install " + tool)
-    elif distro.like() == "arch":
-        tools += "tor-router"
-        os.system("pacman -Sy " + tool)
+if distro.like() == "debian":
+    os.system("sh Extras/kali-anonsurf/installer.sh")
+    os.system("apt install " + " ".join(tools))
+elif distro.like() == "arch":
+    tools.append("tor-router")
+    os.system("pacman -Sy " + " ".join(tools))
 
 here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
