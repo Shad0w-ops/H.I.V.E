@@ -25,7 +25,7 @@ def define():
     with open('vars.py', 'r+') as file:
         for line in file:
             vals = line.split(" ")
-            print(vals[0] + ": " + vals[2])
+            print(f"{vals[0]}: {vals[2]}")
         print("Note: If not all inputs are filled then some features may not work")
         SHODAN_API = input("Shodan API Key: ")
         INTELX_API = input("IntelX API Key: ")
@@ -51,7 +51,7 @@ def anon():
         os.system("anonsurf change" if distro.like() == "debian" else "tor-router restart")
     elif action == "status":
         os.system("anonsurf status" if distro.like() == "debian" else "systemctl status tor-router")
-    print("Your current IP is now " + geocoder.ip("me").ip)
+    print(f"Your current IP is now {geocoder.ip("me").ip}")
     input("Press enter to go back to the hive menu: ")
     main()
 
@@ -167,7 +167,7 @@ def intel():
     print(Banners.list2)
     target2 = str(input("Enter the query you want to search: "))
     clear()
-    os.system("python Extras/intel.py -search " + target2 + " -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey " + vars.INTELX_API + " -limit 100")
+    os.system(f"python Extras/intel.py -search {target2} -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey {vars.INTELX_API} -limit 100")
     print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
     input("Press enter to go back to the hive menu: ")
     main()
@@ -182,9 +182,9 @@ def emver():
     data = response.json()
     status = data['data']['status']
     if status == 'valid':
-        print("The email " + email + " is valid")
+        print(f"The email {email} is valid")
     else:
-        print("The email " + email + " is not valid")
+        print(f"The email {email} is not valid")
     input("Press enter to go back to the hive menu: ")
     main()
 
@@ -193,7 +193,7 @@ def sher():
     print(Banners.sherbanner)
     target = input("Enter the username of your target: ")
     clear()
-    os.system("python Extras/sherlock/sherlock/sherlock.py " + target + " --nsfw -fo Sherlock_Output")
+    os.system(f"python Extras/sherlock/sherlock/sherlock.py {target} --nsfw -fo Sherlock_Output")
     input("Press enter to go back to the hive menu: ")
     main()
 
@@ -226,16 +226,16 @@ def misc():
         macad = input("Choose an option: ")
         dev_name = input("Enter the device name: ")
         if macad =="1":
-            os.system("macchanger -r -b " + dev_name)
+            os.system(f"macchanger -r -b {dev_name}")
             input("Press enter to go back to the hive menu: ")
             main()
         if macad =="2":
             macspoof = str(input("Enter the MAC address you want to change to: "))
-            os.system("macchanger -m " + macspoof + " " + dev_name)
+            os.system(f"macchanger -m {macspoof} {dev_name}")
             input("Press enter to go back to the hive menu: ")
             main()
         if macad =="3":
-            os.system("macchanger -p " + dev_name)
+            os.system(f"macchanger -p {dev_name}")
             input("Press enter to go back to the hive menu: ")
             main()
     input("Press enter to go back to the hive menu: ")
@@ -272,7 +272,6 @@ def main():
             print("Enter a valid module number!")
             modulechoice()
     modulechoice()
-
 
 if __name__ == '__main__':
     if os.geteuid() != 0:
