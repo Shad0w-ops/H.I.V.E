@@ -1,6 +1,6 @@
 ## Author:       SHAD0W-0PS, UX0l0l
 ## Script Name:  H.I.V.E
-## Start Date:   26/8/2022
+## Start Date:   26/08/2022
 ## End Date:     --/--/----
 ## Purpose:      To automate some OSINT tasks
 
@@ -17,25 +17,28 @@ import geocoder
 
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
+itemvars = [(key, value) for key, value in list(vars.__dict__.items()) if not key.startswith("__") and not callable(value)]
+
 # Defining necessary variables
 ##############################
 def define():
     clear()
-    print(Banners.bannermain)
-    with open('vars.py', 'r+') as file:
-        for line in file:
-            vals = line.split(" ")
-            print(f"{vals[0]}: {vals[2]}")
-        print("Note: If not all inputs are filled then some features may not work")
-        SHODAN_API = input("Shodan API Key: ")
-        INTELX_API = input("IntelX API Key: ")
-        HUNTER_API = input("Hunter API Key: ")
-        TRUECALLER_ID = input("TrueCaller ID: ")
-        DBFILE = input("Text DB file path: ")
+    print(f"{Banners.bannermain}\n")
     
-        file.truncate(0)  # Clear the file first
+    itemvars = [(key, value) for key, value in list(vars.__dict__.items()) if not key.startswith("__") and not callable(value)]
+    
+    for key, value in itemvars:
+        print(f"{key}: '{value}'")
+
+    print("\nNote: If not all inputs are filled then some features may not work\nPlease fill out the following information:\n")
+
+    with open('vars.py', 'r+') as file:
+        file.truncate(0)
         file.seek(0)
-        file.write(f"SHODAN_API = '{SHODAN_API}'\nINTELX_API = '{INTELX_API}'\nHUNTER_API = '{HUNTER_API}'\nTRUECALLER_ID = '{TRUECALLER_ID}'\nDBFILE = '{DBFILE}'\n")
+        for key, value in itemvars:
+            input_value = input(f"{key}: ")
+            file.write(f"{key} = '{input_value}'\n")
+
     main()
 
 # Defining needed Functions
@@ -276,7 +279,7 @@ def main():
 if __name__ == '__main__':
     if os.geteuid() != 0:
         exit("[*] Root privileges not present.\n[*] Run the script using 'sudo python3 hive.py'.")
-    elif any(value == '' for value in vars.__dict__.values()):
+    elif all(value == '' for value in [value for _, value in itemvars]):
         define()
     else:
         main()
