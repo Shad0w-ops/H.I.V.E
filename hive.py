@@ -242,26 +242,26 @@ def misc():
     main()
 
 def modulechoice():
-        choice1 = input("Enter the number of the module you want to use: ").strip()
-        options = {
-            "1": truecaller,
-            "2": shodancrawl,
-            "3": geo,
-            "4": intel,
-            "5": emver,
-            "6": sher,
-            "7": misc,
-            "8": CredFetch,
-            "9": define,
-            "0": exit
-        }
+    choice1 = input("Enter the number of the module you want to use: ").strip()
+    options = {
+        "1": truecaller,
+        "2": shodancrawl,
+        "3": geo,
+        "4": intel,
+        "5": emver,
+        "6": sher,
+        "7": misc,
+        "8": CredFetch,
+        "9": define,
+        "0": exit
+    }
 
-        if choice1 in options:
-            clear()
-            options[choice1]()
-        else:
-            print("Enter a valid module number!")
-            modulechoice()
+    if choice1 in options:
+        clear()
+        options[choice1]()
+    else:
+        print("Enter a valid module number!")
+        modulechoice()
 
 ###########################################################################
 
@@ -271,7 +271,6 @@ def main():
     clear()
     print(Banners.bannermain)
     print(Banners.tool_list)
-    print("--------------------------------------------")
     modulechoice()
 
 if __name__ == '__main__':
