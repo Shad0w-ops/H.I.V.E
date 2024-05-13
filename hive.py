@@ -241,16 +241,7 @@ def misc():
     input("Press enter to go back to the hive menu: ")
     main()
 
-###########################################################################
-
-# Script start
-#------------------------
-def main():
-    clear()
-    print(Banners.bannermain)
-    print(Banners.tool_list)
-    print("--------------------------------------------")
-    def modulechoice():
+def modulechoice():
         choice1 = input("Enter the number of the module you want to use: ").strip()
         options = {
             "1": truecaller,
@@ -271,6 +262,16 @@ def main():
         else:
             print("Enter a valid module number!")
             modulechoice()
+
+###########################################################################
+
+# Script start
+#------------------------
+def main():
+    clear()
+    print(Banners.bannermain)
+    print(Banners.tool_list)
+    print("--------------------------------------------")
     modulechoice()
 
 if __name__ == '__main__':
