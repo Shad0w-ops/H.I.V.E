@@ -38,24 +38,24 @@ def define():
         for key, value in itemvars:
             input_value = input(f"{key}: ")
             file.write(f"{key} = '{input_value}'\n")
-
     main()
 
 # Defining needed Functions
 #########################################################
 
 def anon():
-    action = input("Enter the desired action {start|stop|change/restart|status}: ")
-    if action == "start":
-        os.system("anonsurf start" if distro.like() == "debian" else "tor-router start")
-    elif action == "stop":
-        os.system("anonsurf stop" if distro.like() == "debian" else "tor-router stop")
-    elif action == "change" or "restart":
-        os.system("anonsurf change" if distro.like() == "debian" else "tor-router restart")
-    elif action == "status":
-        os.system("anonsurf status" if distro.like() == "debian" else "systemctl status tor-router")
-    print(f"Your current IP is now {geocoder.ip("me").ip}")
-    input("Press enter to go back to the hive menu: ")
+    action = input("Enter the desired action {start|stop|restart|status}: ")
+    commands = {
+        "start": "anonsurf start" if distro.like() == "debian" else "tor-router start",
+        "stop": "anonsurf stop" if distro.like() == "debian" else "tor-router stop",
+        "restart": "anonsurf change" if distro.like() == "debian" else "tor-router restart",
+        "status": "anonsurf status" if distro.like() == "debian" else "systemctl status tor-router"
+    }
+
+    if action in commands:
+        os.system(commands.get(action, "Invalid action"))
+        print(f"Your current IP is now {geocoder.ip("me").ip}")
+        input("Press enter to go back to the hive menu: ")
     main()
 
 def CredFetch():
@@ -102,34 +102,29 @@ def CredFetch():
             main()
         else:
             clear()
-            print("Target not found")
-            print("--------------------")
+            print("Target not found\n----------------")
             input("Press enter to go back to the hive menu: ")
             main()
 
 def truecaller():
     clear()
     #print(Banners.bannerphone)
-    numtosearch = str(input("Enter the number you want to search: "))
+    numtosearch = input("Enter the number you want to search: ").strip()
     country = input("Enter the country identifier example [CA]: ")
     xlist = search_phonenumber(numtosearch, country, vars.TRUECALLER_ID)
-    print("-------------------------------------")
-    print(" ")
+    print("-------------------------------------\n")
     print("Access: ", xlist["data"][0]["access"])
     print("Name: ", xlist["data"][0]["name"])
     print("Id: ", xlist["data"][0]["id"])
     print("Phone: ", xlist["data"][0]["phones"][0]["e164Format"])
     print("------------------------")
-    print("type back to go back to main menu")
-    choice2 = input("type in your choice: ")
-    if choice2 =="back":
-        main()
+    input("Press enter to go back to the hive menu: ")
 
 # Shodan module
 #--------------
 def shodancrawl():
     print(Banners.bannershod)
-    ip = input("Enter the IP address you want to search for: ")
+    ip = input("Enter the IP address you want to search for: ").strip()
     api = shodan.Shodan(vars.SHODAN_API)
     results = api.host(ip)
     yaml_data = yaml.safe_dump(results, default_flow_style=False)
@@ -168,9 +163,8 @@ def geo():
 def intel():
     clear()
     print(Banners.list2)
-    target2 = str(input("Enter the query you want to search: "))
-    clear()
-    os.system(f"python Extras/intel.py -search {target2} -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey {vars.INTELX_API} -limit 100")
+    target = input("Enter the query you want to search: ").strip()
+    os.system(f"python Extras/intel.py -search {target} -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey {vars.INTELX_API} -limit 100")
     print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
     input("Press enter to go back to the hive menu: ")
     main()
@@ -184,10 +178,7 @@ def emver():
     response = requests.get(url)
     data = response.json()
     status = data['data']['status']
-    if status == 'valid':
-        print(f"The email {email} is valid")
-    else:
-        print(f"The email {email} is not valid")
+    print(f"The email {email} is {'valid' if status == 'valid' else 'not valid'}")
     input("Press enter to go back to the hive menu: ")
     main()
 
@@ -197,6 +188,7 @@ def sher():
     target = input("Enter the username of your target: ")
     clear()
     os.system(f"python Extras/sherlock/sherlock/sherlock.py {target} --nsfw -fo Sherlock_Output")
+    print("Output saved to the Sherlock_Output directory")
     input("Press enter to go back to the hive menu: ")
     main()
 
@@ -245,7 +237,7 @@ def misc():
     main()
 
 def modulechoice():
-    choice1 = input("Enter the number of the module you want to use: ").strip()
+    choice = input("Enter the number of the module you want to use: ").strip()
     options = {
         "1": truecaller,
         "2": shodancrawl,
@@ -259,9 +251,9 @@ def modulechoice():
         "0": exit
     }
 
-    if choice1 in options:
+    if choice in options:
         clear()
-        options[choice1]()
+        options[choice]()
     else:
         print("Enter a valid module number!")
         modulechoice()

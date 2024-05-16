@@ -110,7 +110,7 @@ This module can be used to find usernames across many social networks and saves 
 
 #### 1) Anonymous Mode
 
-Allows you to enter commands for anonsurf/tor-router to activate system-wide tor-routing for improved privacy and security. Commands include: start, stop, restart/change and status.
+Allows you to enter commands for anonsurf/tor-router to activate system-wide tor-routing for improved privacy and security. Commands include: start, stop, restart and status.
 
 #### 2) Spoof your MAC address
 
