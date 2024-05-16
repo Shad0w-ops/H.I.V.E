@@ -8,20 +8,21 @@
 import os
 import shodan
 import requests
-import yaml
 import Banners
 import vars
 import distro
 import geocoder
+from ruamel import yaml
 from intelxapi import intelx
 from truecallerpy import search_phonenumber
+
+# Defining necessary variables
+##############################
 
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
 itemvars = [(key, value) for key, value in list(vars.__dict__.items()) if not key.startswith("__") and not callable(value)]
 
-# Defining necessary variables
-##############################
 def define():
     clear()
     print(f"{Banners.bannermain}\n")
@@ -41,8 +42,10 @@ def define():
             file.write(f"{key} = '{input_value}'\n")
     main()
 
+intelx = intelx(vars.INTELX_API)
+
 # Defining needed Functions
-#########################################################
+###########################
 
 def anon():
     action = input("Enter the desired action {start|stop|restart|status}: ")
@@ -164,16 +167,15 @@ def geo():
 def intel():
     clear()
     print(Banners.list2)
-    intelx = intelx(vars.INTELX_API)
     target = input("Enter the query you want to search: ").strip()
     buckets = ["pastes", "dumpster", "darknet", "web.public", "whois", "usenet", "documents.public", "leaks.public"]
     try:
         result = intelx.search(target, buckets=buckets)
         print(yaml.dump(result))
+        print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
-        print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
         input("Press enter to go back to the hive menu: ")
         main()
 
