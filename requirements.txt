@@ -13,3 +13,4 @@ pandas>=1.0.0
 openpyxl<=3.0.10
 distro
 geocoder
+tabulate
