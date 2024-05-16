@@ -1,7 +1,7 @@
 requests
 truecallerpy
 shodan
-ruamel.yaml
+pyyaml
 certifi>=2019.6.16
 colorama>=0.4.1
 PySocks>=1.7.0

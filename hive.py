@@ -9,10 +9,11 @@ import os
 import shodan
 import requests
 import Banners
+import subprocess
+import yaml
 import vars
 import distro
 import geocoder
-from ruamel import yaml
 from intelxapi import intelx
 from truecallerpy import search_phonenumber
 
@@ -46,7 +47,6 @@ intelx = intelx(vars.INTELX_API)
 
 # Defining needed Functions
 ###########################
-
 def anon():
     action = input("Enter the desired action {start|stop|restart|status}: ")
     commands = {
@@ -132,8 +132,8 @@ def shodancrawl():
     api = shodan.Shodan(vars.SHODAN_API)
     results = api.host(ip)
     yaml_data = yaml.safe_dump(results, default_flow_style=False)
-    print(yaml_data)
-    with open(f"Shodan_Output/{ip}.txt", "w") as outfile:
+    subprocess.run(['less'], input=yaml_data.encode())
+    with open(f"output/shodan/{ip}.yaml", "w") as outfile:
         outfile.write(yaml_data)
     print(f"Information about {ip} saved to file.")
     input("Press enter to go back to the hive menu: ")
@@ -171,7 +171,10 @@ def intel():
     buckets = ["pastes", "dumpster", "darknet", "web.public", "whois", "usenet", "documents.public", "leaks.public"]
     try:
         result = intelx.search(target, buckets=buckets)
-        print(yaml.dump(result))
+        yaml_data = yaml.dump(result)
+        subprocess.run(['less'], input=yaml_data.encode())
+        with open(f"output/intelx/{target}.yaml", "w") as outfile:
+            outfile.write(yaml_data)
         print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -197,8 +200,8 @@ def sher():
     print(Banners.sherbanner)
     target = input("Enter the username of your target: ")
     clear()
-    os.system(f"python Extras/sherlock/sherlock/sherlock.py {target} --nsfw -fo Sherlock_Output")
-    print("Output saved to the Sherlock_Output directory")
+    os.system(f"python Extras/sherlock/sherlock/sherlock.py {target} --nsfw -fo output/sherlock")
+    print("Results saved to the sherlock output directory")
     input("Press enter to go back to the hive menu: ")
     main()
 

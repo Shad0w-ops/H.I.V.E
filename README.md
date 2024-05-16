@@ -32,7 +32,7 @@
 - [ ] Attempt to replace all local tools (such as [Anonsurf](#1-anonymous-mode) and [Sherlock module](#6-sherlock))
     - [ ] Make it so that the setup.py script pulls/clones Anonsurf from the repository to download an up-to-date version (it will not be included in the repo by default)
     - [ ] Try to replace Sherlock with an API, if not, the script will be downloaded from the repo and (ideally) imported into the script instead of executed using "os.system()"
-- [ ] Organize the outputs into one output directory with a directory for each tool/module
+- [x] Organize the outputs into one output directory with a directory for each tool/module
 - [ ] Add IntelX output folder (possibly other modules as well)
 - [ ] Maybe add more APIs or replace some APIs with more competent ones
 
