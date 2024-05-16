@@ -4,9 +4,9 @@
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg?style=for-the-badge)](https://www.python.org/)
 ![Develope & tested on Kali Linux & Black Arch](https://img.shields.io/badge/Developed%20&%20tested%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet.svg?style=for-the-badge)
 
-### DISCLAIMER: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
+**DISCLAIMER:** This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
-## Table Of Contents
+# Table Of Contents
 
 * [Installation (Linux)](#installation-linux)
      * [How to get Truecaller ID](#how-to-get-truecaller-id)
@@ -25,6 +25,16 @@
 * [API Account Options Table](#api-account-options-table)
 * [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 * [Credits](#credits)
+
+## v1.3 To-do List:
+
+- [ ] Add regex support to [CredFetch](#8-credfetch-previously-phonekit)
+- [ ] Attempt to replace all local tools (such as [Anonsurf](#1-anonymous-mode) and [Sherlock module](#6-sherlock))
+    - [ ] Make it so that the setup.py script pulls/clones Anonsurf from the repository to download an up-to-date version (it will not be included in the repo by default)
+    - [ ] Try to replace Sherlock with an API, if not, the script will be downloaded from the repo and (ideally) imported into the script instead of executed using "os.system()"
+- [ ] Organize the outputs into one output directory with a directory for each tool/module
+- [ ] Add IntelX output folder (possibly other modules as well)
+- [ ] Maybe add more APIs or replace some APIs with more competent ones
 
 ## Setup & Installation (Linux)
 
