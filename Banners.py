@@ -85,7 +85,7 @@ tool_list = r'''
 '''
 
 #intelx capabilities banner
-list2 = '''
+list2 = r'''
 In this module you can search for any of those
 ----------------------------------------------
 Email address       Ethereum address
