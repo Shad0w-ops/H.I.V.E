@@ -86,20 +86,20 @@ tool_list = r'''
 
 #intelx capabilities banner
 list2 = r'''
-In this module you can search for any of those
-----------------------------------------------
+In this module you can search for any of the following:
+-------------------------------------------------------
 Email address       Ethereum address
 Domain              MAC address
 URL                 IPFS Hash
 IP Addresses        Credit Card Number
 Phone Numbers       Social Security Number
 Bitcoin address     IBAN
-----------------------------------------------
+-------------------------------------------------------
 '''
 
 miscbanner = r'''
 1) Anonymous mode
-2) Spoof Your MAC Address
+2) Spoof your MAC address
 '''
 
 macchange = r'''
