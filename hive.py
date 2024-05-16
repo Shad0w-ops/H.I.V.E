@@ -8,12 +8,13 @@
 import os
 import shodan
 import requests
-from truecallerpy import search_phonenumber
 import yaml
 import Banners
 import vars
 import distro
 import geocoder
+from intelxapi import intelx
+from truecallerpy import search_phonenumber
 
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
@@ -163,11 +164,18 @@ def geo():
 def intel():
     clear()
     print(Banners.list2)
+    intelx = intelx(vars.INTELX_API)
     target = input("Enter the query you want to search: ").strip()
-    os.system(f"python Extras/intel.py -search {target} -buckets \"pastes, dumpster, darknet, web.public, whois, usenet, documents.public, leaks.public\" -apikey {vars.INTELX_API} -limit 100")
-    print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
-    input("Press enter to go back to the hive menu: ")
-    main()
+    buckets = ["pastes", "dumpster", "darknet", "web.public", "whois", "usenet", "documents.public", "leaks.public"]
+    try:
+        result = intelx.search(target, buckets=buckets)
+        print(yaml.dump(result))
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    finally:
+        print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
+        input("Press enter to go back to the hive menu: ")
+        main()
 
 # Email Verifier Module
 #------------------------

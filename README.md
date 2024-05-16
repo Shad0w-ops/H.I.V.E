@@ -4,7 +4,7 @@
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg?style=for-the-badge)](https://www.python.org/)
 ![Develope & tested on Kali Linux & Black Arch](https://img.shields.io/badge/Developed%20&%20tested%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet.svg?style=for-the-badge)
 
-### **DISCLAIMER**: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
+### DISCLAIMER: This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
 
 ## Table Of Contents
 
@@ -26,10 +26,8 @@
 * [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 * [Credits](#credits)
 
-## Installation (Linux)
+## Setup & Installation (Linux)
 
-    pip3 install -r requirements.txt
-    
     python3 setup.py
 
  Edit the vars.py file by adding your APIs In the following format:
@@ -130,8 +128,6 @@ Or if the user wants to find another John Doe that has a GMail address attatched
 
 In the future, regex will be used to better sort text databases of all kinds.
 
-</ul>
-
 ## API Account Options Table
 
 |API|Website|Status|
@@ -151,6 +147,6 @@ In the future, regex will be used to better sort text databases of all kinds.
 * [Truecallerpy](https://github.com/sumithemmadi/truecallerpy)
 * [Shodan-Python](https://github.com/achillean/shodan-python)
 * [Geocoder](https://github.com/DenisCarriere/geocoder)
-* [Intelx.py](https://github.com/zeropwn/intelx.py)
+* [Intelx.py](https://github.com/IntelligenceX/Python)
 * [Hunter.io](https://hunter.io/)
 * [Sherlock](https://github.com/sherlock-project/sherlock)
