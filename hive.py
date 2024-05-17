@@ -31,7 +31,7 @@ def define():
     itemvars = [(key, value) for key, value in list(vars.__dict__.items()) if not key.startswith("__") and not callable(value)]
     
     for key, value in itemvars:
-        print(f"{key}: '{value}'")
+        print(f"{key} = '{value}'")
 
     print("\nNote: If not all inputs are filled then some features may not work\nPlease fill out the following information:\n")
 
@@ -233,7 +233,7 @@ def misc():
     choice = input("Choose an option: ")
     if choice =="1":
         anon()
-    if choice =="2":
+    elif choice =="2":
         clear()
         print(Banners.macchange)
         macad = input("Choose an option: ")
@@ -242,12 +242,12 @@ def misc():
             os.system(f"macchanger -r -b {dev_name}")
             input("Press enter to go back to the hive menu: ")
             main()
-        if macad =="2":
-            macspoof = str(input("Enter the MAC address you want to change to: "))
+        elif macad =="2":
+            macspoof = input("Enter the MAC address you want to change to: ")
             os.system(f"macchanger -m {macspoof} {dev_name}")
             input("Press enter to go back to the hive menu: ")
             main()
-        if macad =="3":
+        elif macad =="3":
             os.system(f"macchanger -p {dev_name}")
             input("Press enter to go back to the hive menu: ")
             main()
@@ -276,8 +276,7 @@ def modulechoice():
         print("Enter a valid module number!")
         modulechoice()
 
-###########################################################################
-
+#########################
 # Script start
 #------------------------
 def main():
