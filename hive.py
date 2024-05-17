@@ -133,9 +133,11 @@ def shodancrawl():
     results = api.host(ip)
     yaml_data = yaml.safe_dump(results, default_flow_style=False)
     subprocess.run(['less'], input=yaml_data.encode())
-    with open(f"output/shodan/{ip}.yaml", "w") as outfile:
-        outfile.write(yaml_data)
-    print(f"Information about {ip} saved to file.")
+    save = input("Would you like to save the output? [Y/n] ")
+    if save.lower() != "n":
+        with open(f"output/shodan/{ip}.yaml", "w") as outfile:
+            outfile.write(yaml_data)
+            print(f"Information about {ip} saved in output directory.")
     input("Press enter to go back to the hive menu: ")
     main()
 
@@ -173,8 +175,11 @@ def intel():
         result = intelx.search(target, buckets=buckets)
         yaml_data = yaml.dump(result)
         subprocess.run(['less'], input=yaml_data.encode())
-        with open(f"output/intelx/{target}.yaml", "w") as outfile:
-            outfile.write(yaml_data)
+        save = input("Would you like to save the output? [Y/n] ")
+        if save.lower() != "n":
+            with open(f"output/intelx/{target}.yaml", "w") as outfile:
+                outfile.write(yaml_data)
+                print(f"Saved to {target}.yaml in output directory.")
         print("Note: if the output isnt satifactory, you can paste the ID\ninto the intelx website then search in that specific database for other info")
     except Exception as e:
         print(f"An error occurred: {e}")
