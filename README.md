@@ -23,7 +23,7 @@
       * [2) Spoof your MAC address](#2-spoof-your-mac-address)
    * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
 * [API Account Options Table](#api-account-options-table)
-* [HIVE Flow Diagram](#hive-flow-diagram) (Needs to be updated)
+* [H.I.V.E Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 * [Credits](#credits)
 
 ## v1.3 To-do List:
@@ -132,9 +132,11 @@ For example, if one wants to search for a certain John Doe, with an American or 
 
     john doe +1
 
-Or if the user wants to find another John Doe that has a GMail address attatched, they can search:
+Or, if the user wants to find another John Doe that has a GMail address attatched, they can search:
 
     john doe @gmail[.com]
+
+Also, if the user wants to search for a specific email or phone number without specifying a name they can do that as well.
 
 In the future, regex will be used to better sort text databases of all kinds.
 
@@ -148,8 +150,8 @@ In the future, regex will be used to better sort text databases of all kinds.
 
 (NOTE) Academic means that there is a better subscription plan for free/discounted that they provide for accounts created with student emails (.edu)
 
-## HIVE Flow Diagram
-![hive (2)](https://user-images.githubusercontent.com/43708460/215889147-25a2bed3-df29-40a0-8e7d-deba0934e97c.jpeg)
+## H.I.V.E Flow Diagram
+![H.I.V.E Flow Diagram](https://user-images.githubusercontent.com/43708460/215889147-25a2bed3-df29-40a0-8e7d-deba0934e97c.jpeg)
 
 ---
 
