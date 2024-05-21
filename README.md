@@ -112,7 +112,7 @@ This module utilises the Hunter.io API and allows you to check if an email addre
 
 ### 6) Sherlock
 
-This module can be used to find usernames across many social networks and saves the output in the Sherlock_Output folder.
+This module can be used to find usernames across many social networks and saves the output in the output/sherlock directory.
 
 ### 7) Misc
 
