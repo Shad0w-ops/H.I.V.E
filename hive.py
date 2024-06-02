@@ -22,12 +22,13 @@ from truecallerpy import search_phonenumber
 
 clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
 
-itemvars = [(key, value) for key, value in list(vars.__dict__.items()) if not key.startswith("__") and not callable(value)]
+itemvars = []
 
-def define():
+def define() -> None:
     clear()
     print(f"{Banners.bannermain}\n")
     
+    global itemvars
     itemvars = [(key, value) for key, value in list(vars.__dict__.items()) if not key.startswith("__") and not callable(value)]
     
     for key, value in itemvars:
@@ -41,28 +42,62 @@ def define():
         for key, value in itemvars:
             input_value = input(f"{key}: ")
             file.write(f"{key} = '{input_value}'\n")
-    main()
+    return main()
 
 intelx = intelx(vars.INTELX_API)
 
 # Defining needed Functions
 ###########################
-def anon():
-    action = input("Enter the desired action {start|stop|restart|status}: ")
-    commands = {
-        "start": "anonsurf start" if distro.like() == "debian" else "tor-router start",
-        "stop": "anonsurf stop" if distro.like() == "debian" else "tor-router stop",
-        "restart": "anonsurf change" if distro.like() == "debian" else "tor-router restart",
-        "status": "anonsurf status" if distro.like() == "debian" else "systemctl status tor-router"
-    }
+def spoof(choice=None) -> None:
+    match choice:
+        case None:
+            print(Banners.spoofbanner)
+            print("----------------")
+            try:
+                choice = int(input("Choose an option: "))
+            except ValueError:
+                clear()
+                print("Please enter a valid number!")
+                choice = None
+            return spoof(choice)
+        case 1:
+            action = input("Enter the desired action {start|stop|restart|status}: ")
+            commands = {
+                "start": "anonsurf start" if distro.like() == "debian" else "tor-router start",
+                "stop": "anonsurf stop" if distro.like() == "debian" else "tor-router stop",
+                "restart": "anonsurf change" if distro.like() == "debian" else "tor-router restart",
+                "status": "anonsurf status" if distro.like() == "debian" else "systemctl status tor-router"
+            }
+            command = commands.get(action)
+            if command:
+                os.system(command)
+                print(f"Your current IP is now {geocoder.ip('me').ip}")
+            else:
+                print("Invalid action")
+                return spoof(1)
+        case 2 | 3 | 4 | 5:
+            dev_name = input("Enter the device name: ")
+            os.system(f"ifconfig {dev_name} down")
+            match choice:
+                case 2:
+                    command = f"macchanger -r -b {dev_name}"
+                case 3:
+                    command = f"macchanger -r {dev_name}"
+                case 4:
+                    macspoof = input("Enter the MAC address you want to change to: ")
+                    command = f"macchanger -m {macspoof} {dev_name}"
+                case 5:
+                    command = f"macchanger -p {dev_name}"
+            os.system(command)
+            os.system(f"ifconfig {dev_name} up")
+        case _:
+            clear()
+            print("Invalid choice")
+            return spoof()
+    input("Press enter to go back to the hive menu: ")
+    return main()
 
-    if action in commands:
-        os.system(commands.get(action, "Invalid action"))
-        print(f"Your current IP is now {geocoder.ip("me").ip}")
-        input("Press enter to go back to the hive menu: ")
-    main()
-
-def CredFetch():
+def CredFetch() -> None:
     Found = False
     clear()
     print(Banners.credbanner)
@@ -81,10 +116,11 @@ def CredFetch():
                 phone_number = ""
                 for index, content in enumerate(info):
                     if content and content != "0" and content != "" and content != "1/1/0001 12:00:00 AM" and not content.endswith("@facebook.com") and labels[index] and labels[index] != "":
-                        if labels[index] == "Full Name":
-                            full_name = content
-                        elif labels[index] == "Phone Number":
-                            phone_number = content
+                        match labels[index]:
+                            case "Full Name":
+                                full_name = content
+                            case "Phone Number":
+                                phone_number = content
                 if full_name:
                     user_info_list.append(info)
                     print(f"{i}: {full_name} - Phone Number: {phone_number}")
@@ -103,14 +139,14 @@ def CredFetch():
                         print(f"{labels[index]}: {content}")
                 print("--------------------")
             input("Press enter to go back to the hive menu: ")
-            main()
+            return main()
         else:
             clear()
             print("Target not found\n----------------")
             input("Press enter to go back to the hive menu: ")
-            main()
+            return main()
 
-def truecaller():
+def truecaller() -> None:
     clear()
     #print(Banners.bannerphone)
     numtosearch = input("Enter the number you want to search: ").strip()
@@ -123,10 +159,11 @@ def truecaller():
     print("Phone: ", xlist["data"][0]["phones"][0]["e164Format"])
     print("------------------------")
     input("Press enter to go back to the hive menu: ")
+    return main()
 
 # Shodan module
 #--------------
-def shodancrawl():
+def shodancrawl() -> None:
     print(Banners.bannershod)
     ip = input("Enter the IP address you want to search for: ").strip()
     api = shodan.Shodan(vars.SHODAN_API)
@@ -139,34 +176,36 @@ def shodancrawl():
             outfile.write(yaml_data)
             print(f"Information about {ip} saved in output directory.")
     input("Press enter to go back to the hive menu: ")
-    main()
+    return main()
 
 # IP geolocation Module
 #------------------------
-def geo():
+def geo() -> None:
     print(Banners.ipgeobanner)
     ip = input("Enter the IP of your Target (leave empty to see yours): ")
     print("Locating IP...")
     response = geocoder.ip(ip).json.get("raw")
     if response:
         for key, value in response.items():
-            if key not in ["timezone", "readme"]:  # Exclude these keys
-                if key == "ip":
+            match key:
+                case "timezone" | "readme":
+                    pass
+                case "ip":
                     print(f"IP: {value}")
-                elif key == "loc":
+                case "loc":
                     print(f"Location: {value}")
-                elif key == "org":
+                case "org":
                     print(f"ISP: {value}")
-                else:
+                case _:
                     print(f"{key.capitalize()}: {value}")
     else:
         print("No data found for the IP.")
     input("Press enter to go back to the hive menu: ")
-    main()
+    return main()
 
 # Intelligencex API module
-#------------------------
-def intel():
+#-------------------------
+def intel() -> None:
     clear()
     print(Banners.list2)
     target = input("Enter the query you want to search: ").strip()
@@ -185,11 +224,11 @@ def intel():
         print(f"An error occurred: {e}")
     finally:
         input("Press enter to go back to the hive menu: ")
-        main()
+        return main()
 
 # Email Verifier Module
 #------------------------
-def emver():
+def emver() -> None:
     print(Banners.emvbanner)
     email = input('Enter the email you want verified: ')
     url = f'https://api.hunter.io/v2/email-verifier?email={email}&api_key={vars.HUNTER_API}'
@@ -198,21 +237,21 @@ def emver():
     status = data['data']['status']
     print(f"The email {email} is {'valid' if status == 'valid' else 'not valid'}")
     input("Press enter to go back to the hive menu: ")
-    main()
+    return main()
 
 # integrated Sherlock module
-def sher():
+def sher() -> None:
     print(Banners.sherbanner)
     target = input("Enter the username of your target: ")
     clear()
     os.system(f"python Extras/sherlock/sherlock/sherlock.py {target} --nsfw -fo output/sherlock")
     print("Results saved to the sherlock output directory")
     input("Press enter to go back to the hive menu: ")
-    main()
+    return main()
 
 # TO BE USED IN A SEPERATE SCRIPT
 #metadata extractor module
-#def meta():
+#def meta() -> None:
 #    print(Banners.meta)                        
 #    infoDict = {}
 #    exifToolPath = ("exiftool")
@@ -225,36 +264,9 @@ def sher():
 #        print(k,':', v)
 #    print("-------------------------")
 #    input("Press enter to go back to the hive menu: ")
-#    main()
+#    return main()
 
-def misc():
-    print(Banners.miscbanner)
-    print("----------------")
-    choice = input("Choose an option: ")
-    if choice =="1":
-        anon()
-    elif choice =="2":
-        clear()
-        print(Banners.macchange)
-        macad = input("Choose an option: ")
-        dev_name = input("Enter the device name: ")
-        if macad =="1":
-            os.system(f"macchanger -r -b {dev_name}")
-            input("Press enter to go back to the hive menu: ")
-            main()
-        elif macad =="2":
-            macspoof = input("Enter the MAC address you want to change to: ")
-            os.system(f"macchanger -m {macspoof} {dev_name}")
-            input("Press enter to go back to the hive menu: ")
-            main()
-        elif macad =="3":
-            os.system(f"macchanger -p {dev_name}")
-            input("Press enter to go back to the hive menu: ")
-            main()
-    input("Press enter to go back to the hive menu: ")
-    main()
-
-def modulechoice():
+def modulechoice() -> None:
     choice = input("Enter the number of the module you want to use: ").strip()
     options = {
         "1": truecaller,
@@ -263,7 +275,7 @@ def modulechoice():
         "4": intel,
         "5": emver,
         "6": sher,
-        "7": misc,
+        "7": spoof,
         "8": CredFetch,
         "9": define,
         "0": exit
@@ -271,24 +283,24 @@ def modulechoice():
 
     if choice in options:
         clear()
-        options[choice]()
+        return options[choice]()
     else:
         print("Enter a valid module number!")
-        modulechoice()
+        return modulechoice()
 
 #########################
 # Script start
 #------------------------
-def main():
+def main() -> None:
     clear()
     print(Banners.bannermain)
     print(Banners.tool_list)
-    modulechoice()
+    return modulechoice()
 
 if __name__ == '__main__':
     if os.geteuid() != 0:
         exit("[*] Root privileges not present.\n[*] Run the script using 'sudo python3 hive.py'.")
-    elif all(value == '' for value in [value for _, value in itemvars]):
+    elif all(value == '' for _, value in itemvars):
         define()
     else:
         main()

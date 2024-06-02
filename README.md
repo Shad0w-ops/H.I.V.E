@@ -1,7 +1,7 @@
 ![H.I.V.E Logo](https://user-images.githubusercontent.com/43708460/215892281-dd242251-909e-40b0-bcba-c932269ec482.png)
 
 
-[![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.6-yellow.svg?style=for-the-badge)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.10-red.svg?style=for-the-badge)](https://www.python.org/)
 ![Develope & tested on Kali Linux & Black Arch](https://img.shields.io/badge/Developed%20&%20tested%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet.svg?style=for-the-badge)
 
 **DISCLAIMER:** This tool is intended solely for educational purposes. The creators cannot be held accountable for any unauthorized use. Your utilization of this resource signifies your understanding and acceptance of this disclaimer.
@@ -18,7 +18,7 @@
    * [4) IntelX Database Lookup](#4-intelx-database-lookup)
    * [5) Email Verifier](#5-email-verifier)
    * [6) Sherlock](#6-sherlock)
-   * [7) Misc](#7-misc)
+   * [7) Spoofing](#7-spoofing)
       * [1) Anonymous Mode](#1-anonymous-mode)
       * [2) Spoof your MAC address](#2-spoof-your-mac-address)
    * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
@@ -114,15 +114,20 @@ This module utilises the Hunter.io API and allows you to check if an email addre
 
 This module can be used to find usernames across many social networks and saves the output in the output/sherlock directory.
 
-### 7) Misc
+### 7) Spoofing
 
-#### 1) Anonymous Mode
+#### 1) Tor (Anonymous Mode)
 
 Allows you to enter commands for anonsurf/tor-router to activate system-wide tor-routing for improved privacy and security. Commands include: start, stop, restart and status.
 
 #### 2) Spoof your MAC address
 
-In this module you can change your MAC address to a random or specific MAC address.
+In this section of the module, you will be given 4 options:
+
+1. Change to a random MAC address (pretends to be burned in)
+2. Change to a random MAC address (doesn't pretend to be burned in)
+3. Change to a specific MAC address
+4. Reset MAC address to the original
 
 ### 8) CredFetch (previously Phonekit)
 

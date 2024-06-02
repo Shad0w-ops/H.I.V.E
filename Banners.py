@@ -77,7 +77,7 @@ sherbanner = r'''
 #Main tool list
 tool_list = r'''
 1) TrueCaller     | 6) Sherlock
-2) Shodan Crawler | 7) Misc
+2) Shodan Crawler | 7) Spoofing
 3) IP geolocation | 8) CredFetch
 4) IntelX         | 9) Define Vars
 5) Email Verifier | 0) Exit
@@ -97,13 +97,12 @@ Bitcoin address     IBAN
 -------------------------------------------------------
 '''
 
-miscbanner = r'''
-1) Anonymous mode
-2) Spoof your MAC address
-'''
-
-macchange = r'''
-1) Change to a random MAC address (pretends to be burned in)
-2) Change to a specific MAC address
-3) Reset MAC address to the original
+spoofbanner = r'''
+-------IP SPOOFING-------
+1) Tor (Anonymous mode)
+-------MAC SPOOFING------
+2) Change to a random MAC address (pretends to be burned in)
+3) Change to a random MAC address (doesn't pretend to be burned in)
+4) Change to a specific MAC address
+5) Reset MAC address to the original
 '''
