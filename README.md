@@ -19,7 +19,7 @@
    * [5) Email Verifier](#5-email-verifier)
    * [6) Sherlock](#6-sherlock)
    * [7) Spoofing](#7-spoofing)
-      * [1) Anonymous Mode](#1-anonymous-mode)
+      * [1) Anonymous Mode](#1-tor-anonymous-mode)
       * [2) Spoof your MAC address](#2-spoof-your-mac-address)
    * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
 * [API Account Options Table](#api-account-options-table)
@@ -118,7 +118,7 @@ This module can be used to find usernames across many social networks and saves 
 
 #### 1) Tor (Anonymous Mode)
 
-Allows you to enter commands for anonsurf/tor-router to activate system-wide tor-routing for improved privacy and security. Commands include: start, stop, restart and status.
+Allows you to enter commands for anonsurf/tor-router to activate system-wide traffic routing through tor for improved privacy and security. Commands include: start, stop, restart and status.
 
 #### 2) Spoof your MAC address
 
