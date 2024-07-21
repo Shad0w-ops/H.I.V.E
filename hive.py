@@ -11,40 +11,30 @@ import requests
 import Banners
 import subprocess
 import yaml
-import vars
 import distro
 import geocoder
+import re
 from intelxapi import intelx
 from truecallerpy import search_phonenumber
-
-# Defining necessary variables
-##############################
-
-clear = lambda: os.system('cls' if os.name=='nt' else 'clear')
-
-itemvars = []
+from dotenv import set_key, dotenv_values
+from multiprocessing import Pool, cpu_count
 
 def define() -> None:
+    global env_vars
     clear()
     print(f"{Banners.bannermain}\n")
-    
-    global itemvars
-    itemvars = [(key, value) for key, value in list(vars.__dict__.items()) if not key.startswith("__") and not callable(value)]
-    
-    for key, value in itemvars:
+
+    for key, value in env_vars.items():
         print(f"{key} = '{value}'")
 
     print("\nNote: If not all inputs are filled then some features may not work\nPlease fill out the following information:\n")
 
-    with open('vars.py', 'r+') as file:
-        file.truncate(0)
-        file.seek(0)
-        for key, value in itemvars:
+    with open('.env', 'w') as file:
+        for key, value in env_vars.items():
             input_value = input(f"{key}: ")
-            file.write(f"{key} = '{input_value}'\n")
+            set_key('.env', key, input_value)
+    env_vars = dotenv_values('.env')  # Reload the .env file with the new values
     return main()
-
-intelx = intelx(vars.INTELX_API)
 
 # Defining needed Functions
 ###########################
@@ -97,61 +87,83 @@ def spoof(choice=None) -> None:
     input("Press enter to go back to the hive menu: ")
     return main()
 
+def process_line(args):
+    line, findlist, labels = args
+    if all(elem in line.lower() for elem in findlist):
+        info = line.strip().split(",")
+        result = []
+        full_name = ""
+        phone_number = ""
+        for index, content in enumerate(info):
+            if content and content != "0" and content != "1/1/0001 12:00:00 AM" and not content.endswith("@facebook.com") and labels[index]:
+                result.append((labels[index], content))
+                match labels[index]:
+                    case "Full Name":
+                        full_name = content
+                    case "Phone Number":
+                        phone_number = content
+        if result and full_name and phone_number:
+            return (result, full_name, phone_number)
+    return None
+
 def CredFetch() -> None:
-    Found = False
     clear()
     print(Banners.credbanner)
-    to_find = input("Enter your search query (name, email, number, etc): ")
-    findlist = to_find.split(" ")
+    to_find = input("Enter your search query (name, email, number, etc): ").lower()
+    findlist = to_find.split()
     clear()
-    labels = ["User ID", "", "Email", "Phone Number", "Religion", "DOB", "First Name", "Last Name", "Gender", "Link", "Language", "Username", "Full Name", "Bio", "Workplace", "Job", "Hometown", "Location", "Education", "", "", "", "", "", "", "Relationship Status", "", "", "", "", "", "", "", "", ""]
-    with open(vars.DBFILE, encoding="utf8") as a_file:
-        i = 1
-        user_info_list = []
-        for line in a_file:
-            if all(elem in line.lower() for elem in findlist):
-                Found = True
-                info = line.split(",")
-                full_name = ""
-                phone_number = ""
-                for index, content in enumerate(info):
-                    if content and content != "0" and content != "" and content != "1/1/0001 12:00:00 AM" and not content.endswith("@facebook.com") and labels[index] and labels[index] != "":
-                        match labels[index]:
-                            case "Full Name":
-                                full_name = content
-                            case "Phone Number":
-                                phone_number = content
-                if full_name:
-                    user_info_list.append(info)
-                    print(f"{i}: {full_name} - Phone Number: {phone_number}")
-                    i += 1
-        if Found:
-            select = input("Select user(s) to print full information (e.g. '1 2 3' or type 'all'): ")
-            clear()
-            if select.lower() == "all":
-                selected_users = range(1, len(user_info_list) + 1)
-            else:
-                selected_users = [int(num) for num in select.split() if num.isdigit() and 0 < int(num) <= len(user_info_list)]
-            for user_num in selected_users:
-                selected_info = user_info_list[user_num - 1]
-                for index, content in enumerate(selected_info):
-                    if content and content != "0" and content != "" and content != "1/1/0001 12:00:00 AM" and not content.endswith("@facebook.com") and labels[index] and labels[index] != "":
-                        print(f"{labels[index]}: {content}")
-                print("--------------------")
-            input("Press enter to go back to the hive menu: ")
-            return main()
+    labels = [
+        "User ID", "", "Email", "Phone Number", "Religion", "DOB", "First Name", "Last Name", "Gender", "Link", "Language",
+        "Username", "Full Name", "Bio", "Workplace", "Job", "Hometown", "Location", "Education", "", "", "", "", "", "",
+        "Relationship Status", "", "", "", "", "", "", "", "", ""
+    ]
+
+    if not env_vars.get('DBFILE'):
+        raise ValueError("DBFILE environment variable is not set in the .env file.")
+
+    with open(env_vars.get('DBFILE'), encoding="utf8") as a_file:
+        lines = a_file.readlines()
+
+    # Use a process pool for parallel processing of lines
+    with Pool(cpu_count()) as pool:
+        results = pool.map(process_line, [(line, findlist, labels) for line in lines])
+
+    user_info_list = [result for result in results if result is not None]
+
+    if user_info_list:
+        for i, (_, full_name, phone_number) in enumerate(user_info_list, start=1):
+            print(f"{i}: {full_name} - Phone Number: {phone_number}")
+
+        select = input("Select user(s) to print full information (e.g. '1 2 3' or type 'all'): ").lower()
+        clear()
+        if select == "all" or "":
+            selected_users = range(1, len(user_info_list) + 1)
         else:
-            clear()
-            print("Target not found\n----------------")
-            input("Press enter to go back to the hive menu: ")
-            return main()
+            try:
+                selected_users = [int(num) for num in select.split() if num.isdigit() and 0 < int(num) <= len(user_info_list)]
+            except ValueError:
+                selected_users = []
+
+        for user_num in selected_users: 
+            selected_info = user_info_list[user_num - 1][0]
+            for label, content in selected_info:
+                print(f"{label}: {content}")
+            print("--------------------")
+
+        input("Press enter to go back to the hive menu: ")
+        return main()
+    else:
+        clear()
+        print("Target not found\n----------------")
+        input("Press enter to go back to the hive menu: ")
+        return main()
 
 def truecaller() -> None:
     clear()
     #print(Banners.bannerphone)
     numtosearch = input("Enter the number you want to search: ").strip()
     country = input("Enter the country identifier example [CA]: ")
-    xlist = search_phonenumber(numtosearch, country, vars.TRUECALLER_ID)
+    xlist = search_phonenumber(numtosearch, country, env_vars.get('TRUECALLER_ID'))
     print("-------------------------------------\n")
     print("Access: ", xlist["data"][0]["access"])
     print("Name: ", xlist["data"][0]["name"])
@@ -166,7 +178,7 @@ def truecaller() -> None:
 def shodancrawl() -> None:
     print(Banners.bannershod)
     ip = input("Enter the IP address you want to search for: ").strip()
-    api = shodan.Shodan(vars.SHODAN_API)
+    api = shodan.Shodan(env_vars.get('SHODAN_API'))
     results = api.host(ip)
     yaml_data = yaml.safe_dump(results, default_flow_style=False)
     subprocess.run(['less'], input=yaml_data.encode())
@@ -231,7 +243,7 @@ def intel() -> None:
 def emver() -> None:
     print(Banners.emvbanner)
     email = input('Enter the email you want verified: ')
-    url = f'https://api.hunter.io/v2/email-verifier?email={email}&api_key={vars.HUNTER_API}'
+    url = f"https://api.hunter.io/v2/email-verifier?email={email}&api_key={env_vars.get('HUNTER_API')}"
     response = requests.get(url)
     data = response.json()
     status = data['data']['status']
@@ -252,11 +264,11 @@ def sher() -> None:
 # TO BE USED IN A SEPERATE SCRIPT
 #metadata extractor module
 #def meta() -> None:
-#    print(Banners.meta)                        
+#    print(Banners.meta)
 #    infoDict = {}
 #    exifToolPath = ("exiftool")
 #    imgPath = input("Enter the path of your file: ")
-#    process = subprocess.Popen([exifToolPath,imgPath], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True) 
+#    process = subprocess.Popen([exifToolPath,imgPath], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, universal_newlines=True)
 #    for tag in process.stdout:
 #        line = tag.strip().split(':')
 #        infoDict[line[0].strip()] = line[-1].strip()
@@ -300,7 +312,18 @@ def main() -> None:
 if __name__ == '__main__':
     if os.geteuid() != 0:
         exit("[*] Root privileges not present.\n[*] Run the script using 'sudo python3 hive.py'.")
-    elif all(value == '' for _, value in itemvars):
+
+    # Defining necessary variables
+    ##############################
+    clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
+
+    # Load environment variables from .env file
+    global env_vars
+    env_vars = dotenv_values('.env')
+
+    intelx = intelx(env_vars.get('INTELX_API'))
+
+    if all(value == '' for _, value in env_vars.items()):
         define()
     else:
         main()

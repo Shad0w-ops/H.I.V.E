@@ -1,6 +1,5 @@
 ![H.I.V.E Logo](https://user-images.githubusercontent.com/43708460/215892281-dd242251-909e-40b0-bcba-c932269ec482.png)
 
-
 [![Python](https://img.shields.io/badge/Python-%E2%89%A5%203.10-red.svg?style=for-the-badge)](https://www.python.org/)
 ![Develope & tested on Kali Linux & Black Arch](https://img.shields.io/badge/Developed%20&%20tested%20on-Kali%20Linux%20&%20Black%20Arch-blueviolet.svg?style=for-the-badge)
 
@@ -8,33 +7,33 @@
 
 # Table Of Contents
 
-* [Installation (Linux)](#installation-linux)
-     * [How to get Truecaller ID](#how-to-get-truecaller-id)
+* [Installation (Linux)](#setup--installation-linux)
+  * [How to get Truecaller ID](#how-to-get-truecaller-id)
 * [Running the script](#running-the-script)
 * [Module Breakdown](#module-breakdown)
-   * [1) Truecaller Reverse Lookup](#1-truecaller-reverse-lookup)
-   * [2) Shodan Crawler](#2-shodan-crawler)
-   * [3) IP Geolocation](#3-ip-geolocation)
-   * [4) IntelX Database Lookup](#4-intelx-database-lookup)
-   * [5) Email Verifier](#5-email-verifier)
-   * [6) Sherlock](#6-sherlock)
-   * [7) Spoofing](#7-spoofing)
-      * [1) Anonymous Mode](#1-tor-anonymous-mode)
-      * [2) Spoof your MAC address](#2-spoof-your-mac-address)
-   * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
+  * [1) Truecaller Reverse Lookup](#1-truecaller-reverse-lookup)
+  * [2) Shodan Crawler](#2-shodan-crawler)
+  * [3) IP Geolocation](#3-ip-geolocation)
+  * [4) IntelX Database Lookup](#4-intelx-database-lookup)
+  * [5) Email Verifier](#5-email-verifier)
+  * [6) Sherlock](#6-sherlock)
+  * [7) Spoofing](#7-spoofing)
+    * [1) Anonymous Mode](#1-tor-anonymous-mode)
+    * [2) Spoof your MAC address](#2-spoof-your-mac-address)
+  * [8) CredFetch (previously Phonekit)](#8-credfetch-previously-phonekit)
 * [API Account Options Table](#api-account-options-table)
 * [H.I.V.E Flow Diagram](#hive-flow-diagram) (Needs to be updated)
 * [Credits](#credits)
 
-## v1.3 To-do List:
+## v1.3 To-do List
 
-- [ ] Add regex support to [CredFetch](#8-credfetch-previously-phonekit)
-- [ ] Attempt to replace all local tools (such as [Anonsurf](#1-anonymous-mode) and [Sherlock module](#6-sherlock))
-    - [ ] Make it so that the setup.py script pulls/clones Anonsurf from the [repository](https://github.com/Und3rf10w/kali-anonsurf) to download an up-to-date version (it will not be included in the repo by default)
-    - [ ] Try to replace Sherlock with an API. If not, the script will be downloaded from the repo and (ideally) imported into the script instead of executed using "os.system()"
-- [x] Organize the outputs into one output directory with a directory for each tool/module
-- [x] Add IntelX output folder (possibly other modules as well)
-- [ ] Maybe add more APIs or replace some APIs with more competent ones
+* [ ] Add regex support to [CredFetch](#8-credfetch-previously-phonekit)
+* [ ] Attempt to replace all local tools (such as [Anonsurf](#1-tor-anonymous-mode) and [Sherlock module](#6-sherlock))
+  * [ ] Make it so that the setup.py script pulls/clones Anonsurf from the [repository](https://github.com/Und3rf10w/kali-anonsurf) to download an up-to-date version (it will not be included in the repo by default)
+  * [ ] Try to replace Sherlock with an API. If not, the script will be downloaded from the repo and (ideally) imported into the script instead of executed using "os.system()"
+* [x] Organize the outputs into one output directory with a directory for each tool/module
+* [x] Add IntelX output folder (possibly other modules as well)
+* [ ] Maybe add more APIs or replace some APIs with more competent ones
 
 ## Setup & Installation (Linux)
 
@@ -94,17 +93,18 @@ The database lookup module utilises the IntelX API to search for a given query i
 (NOTE) the output may not be complete and in that case take the id of the leak and search for it in the IntelX website and search for your query in the database to find that exact term/query.
 
 In this module you can search for:
- * Email addresses
- * Domains
- * URLs
- * IP Addresses
- * Phone Numbers
- * Bitcoin addresses
- * MAC addresses
- * IPFS Hashes
- * Credit Card Numbers
- * IBANs
- * Ethereum addresses
+
+* Email addresses
+* Domains
+* URLs
+* IP Addresses
+* Phone Numbers
+* Bitcoin addresses
+* MAC addresses
+* IPFS Hashes
+* Credit Card Numbers
+* IBANs
+* Ethereum addresses
 
 ### 5) Email Verifier
 
@@ -156,11 +156,13 @@ In the future, regex will be used to better sort text databases of all kinds.
 (NOTE) Academic means that there is a better subscription plan for free/discounted that they provide for accounts created with student emails (.edu)
 
 ## H.I.V.E Flow Diagram
+
 ![H.I.V.E Flow Diagram](https://user-images.githubusercontent.com/43708460/215889147-25a2bed3-df29-40a0-8e7d-deba0934e97c.jpeg)
 
 ---
 
 # Credits
+
 * [Truecallerpy](https://github.com/sumithemmadi/truecallerpy)
 * [Shodan-Python](https://github.com/achillean/shodan-python)
 * [Geocoder](https://github.com/DenisCarriere/geocoder)
